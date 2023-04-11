@@ -34,6 +34,7 @@ const Home = () => {
       <div>
         <h1>Jogo da Matemática</h1>
         <h2>Olá, {user.name}!</h2>
+        <h2>Seu recorde atual é: {user.record}!</h2>
         <Link to="game">
           <Button>Jogar</Button>
         </Link>

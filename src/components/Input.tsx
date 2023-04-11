@@ -8,8 +8,12 @@ const InputStyled = styled.input`
   width: fill-available;
   height: 50px;
   font-size: ${(props) => props.theme.fontSize.lg};
+  text-align: ${(props) => (props.type === "number" ? "end" : "start")}; ;
 `;
 
-export const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => {
-  return <InputStyled {...props} />;
-};
+export const Input = React.forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement>
+>((props: React.InputHTMLAttributes<HTMLInputElement>, ref) => {
+  return <InputStyled ref={ref} {...props} />;
+});

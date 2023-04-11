@@ -4,8 +4,8 @@ import { User } from "../types";
 interface UserContextProps {
   user?: User;
   handleUserName(name: string): void;
-  handleLevel(level: number): void;
-  handleRecord(toAdd: number): void;
+  handleRecord(total: number): void;
+  upgradeLevel(): void;
 }
 
 const UserContext = React.createContext<UserContextProps>(
@@ -26,11 +26,14 @@ export const UserProvider = ({ children }: Props) => {
       level: 1,
     });
   }, []);
-  const handleLevel = React.useCallback((level: number) => {
-    setUser((prev) => ({ ...prev, level }));
+  const handleRecord = React.useCallback((total: number) => {
+    setUser((prev) => ({
+      ...prev,
+      record: prev?.record && prev.record > total ? prev.record : total,
+    }));
   }, []);
-  const handleRecord = React.useCallback((toAdd: number) => {
-    setUser((prev) => ({ ...prev, record: (prev?.record ?? 0) + toAdd }));
+  const upgradeLevel = React.useCallback(() => {
+    setUser((prev) => ({ ...prev, level: (prev?.level ?? 0) + 1 }));
   }, []);
   // side effects
   // provider
@@ -39,8 +42,8 @@ export const UserProvider = ({ children }: Props) => {
       value={{
         user,
         handleUserName,
-        handleLevel,
         handleRecord,
+        upgradeLevel,
       }}
     >
       {children}

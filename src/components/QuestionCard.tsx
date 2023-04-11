@@ -19,17 +19,34 @@ const OperationBox = styled.div`
   align-items: flex-end;
 `;
 
+const Term = styled.p`
+  text-align: end;
+  font-size: 54px;
+  line-height: 4px;
+  letter-spacing: 4px;
+`;
+const Operation = styled.p`
+  text-align: end;
+  font-size: 54px;
+  line-height: 4px;
+  letter-spacing: 4px;
+`;
+
 interface QuestionCardProps {
+  matchNumber: number;
   question: Question;
   notifyResponse(isCorrect: boolean): void;
 }
 
 export const QuestionCard = ({
+  matchNumber,
   question,
   notifyResponse,
 }: QuestionCardProps) => {
   // state
   const [response, setResponse] = React.useState("");
+  // refs
+  const inputRef = React.useRef<HTMLInputElement>(null);
   // handlers
   const reply = () => {
     const responseInt = parseInt(response);
@@ -40,20 +57,24 @@ export const QuestionCard = ({
     setResponse("");
     notifyResponse(isCorrect);
   };
+  React.useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
   // UI
   return (
     <Card>
-      <h2>Q.1</h2>
+      <h2>Q.{matchNumber}</h2>
       <Content>
         <OperationBox>
-          <p>{question.operation}</p>
+          <Operation>{question.operation}</Operation>
         </OperationBox>
         <div>
-          <p>{question.term1}</p>
-          <p>{question.term2}</p>
+          <Term>{question.term1}</Term>
+          <Term>{question.term2}</Term>
         </div>
       </Content>
       <Input
+        ref={inputRef}
         type="number"
         value={response}
         onChange={(e) => setResponse(e.target.value)}
