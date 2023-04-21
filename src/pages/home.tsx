@@ -36,9 +36,10 @@ const Home = () => {
         ) : (
           <>
             <Text>Olá, {user.name}!</Text>
+            <Text>Você está no nível: {user.level}!</Text>
             <Text>Seu recorde atual é: {user.record}!</Text>
             <Link to="game">
-              <Button>Jogar</Button>
+              <Button>{(user?.level ?? 1) > 1 ? "Continuar" : "Jogar"}</Button>
             </Link>
           </>
         )}

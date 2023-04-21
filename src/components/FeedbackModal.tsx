@@ -1,20 +1,34 @@
 // import styled from "styled-components";
 import { BaseModal } from "./BaseModal";
 import { Button } from "./Button";
+import { Heading } from "./Heading";
+import { Text } from "./Text";
 
 interface FeedbackModalProps {
   isCorrect: boolean;
+  upgradeLevel?: boolean;
   onClose(): void;
 }
 
-export const FeedbackModal = ({ isCorrect, onClose }: FeedbackModalProps) => {
+export const FeedbackModal = ({
+  isCorrect,
+  upgradeLevel,
+  onClose,
+}: FeedbackModalProps) => {
   return (
     <BaseModal>
-      <h3>Feedback!</h3>
+      <Heading>Feedback!</Heading>
       {isCorrect ? (
-        <p>Resposta correta! + 10 pontos</p>
+        <Text>Resposta correta! + 10 pontos</Text>
       ) : (
-        <p>Passou perto! Tenta de novo?</p>
+        <Text>Passou perto! Tenta de novo?</Text>
+      )}
+      {upgradeLevel ? (
+        <Text>Parabéns, você avançou de nível!</Text>
+      ) : upgradeLevel === false ? (
+        <Text>Você precisa recomeçar =/</Text>
+      ) : (
+        <></>
       )}
       <Button onClick={onClose}>Continuar</Button>
     </BaseModal>

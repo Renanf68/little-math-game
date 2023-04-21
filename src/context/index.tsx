@@ -27,9 +27,10 @@ export const UserProvider = ({ children }: Props) => {
     });
   }, []);
   const handleRecord = React.useCallback((total: number) => {
+    console.log("total", total);
     setUser((prev) => ({
       ...prev,
-      record: prev?.record && prev.record > total ? prev.record : total,
+      record: (prev?.record ?? 0) + total,
     }));
   }, []);
   const upgradeLevel = React.useCallback(() => {

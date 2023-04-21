@@ -36,7 +36,7 @@ const Operation = styled.p`
 interface QuestionCardProps {
   matchNumber: number;
   question: Question;
-  notifyResponse(isCorrect: boolean): void;
+  notifyResponse(match: number, isCorrect: boolean): void;
 }
 
 export const QuestionCard = ({
@@ -56,7 +56,7 @@ export const QuestionCard = ({
       isCorrect = true;
     }
     setResponse("");
-    notifyResponse(isCorrect);
+    notifyResponse(matchNumber, isCorrect);
   };
   React.useEffect(() => {
     inputRef.current?.focus();

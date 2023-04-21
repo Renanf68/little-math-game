@@ -20,33 +20,74 @@ type FeedBack = {
   isCorrect: boolean;
 };
 
+export type Matches = {
+  match: number;
+  isCorrect?: boolean;
+};
+
+const levelMatches = 10;
+
+const levelMinimumScore = 70;
+
+const initialMatches = [
+  { match: 1 },
+  { match: 2 },
+  { match: 3 },
+  { match: 4 },
+  { match: 5 },
+  { match: 6 },
+  { match: 7 },
+  { match: 8 },
+  { match: 9 },
+  { match: 10 },
+] as Matches[];
+
 const Game = () => {
   // context
   const { user, handleRecord, upgradeLevel } = useUserContext();
   // state
-  const [points, setPoints] = React.useState(0);
+  const [score, setScore] = React.useState(0);
+  const [matches, setMatches] = React.useState<Matches[]>(initialMatches);
   const [match, setMatch] = React.useState<Match>();
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
+  // helpers
+  const shouldUpgradeLevel = React.useMemo(() => {
+    if (matchNumber === levelMatches) {
+      if (score >= levelMinimumScore) return true;
+      return false;
+    }
+  }, [matchNumber, score]);
   // handlers
   const handleNextMatch = React.useCallback(() => {
-    if (matchNumber === 3) {
-      upgradeLevel();
+    if (matchNumber === levelMatches) {
+      if (score >= levelMinimumScore) {
+        handleRecord(score);
+        upgradeLevel();
+      }
+      setScore(0);
       setMatchNumber(1);
+      setMatches(initialMatches);
     } else {
       setMatchNumber((prev) => prev + 1);
     }
-  }, [matchNumber, upgradeLevel]);
+    setFeedback(undefined);
+  }, [matchNumber, score, handleRecord, upgradeLevel]);
   const handleResponse = React.useCallback(
-    (isCorrect: boolean) => {
+    (match: number, isCorrect: boolean) => {
+      setMatches((prev) =>
+        prev.map((i) => {
+          if (i.match === match) return { ...i, isCorrect };
+          return i;
+        })
+      );
       setFeedback({ isCorrect });
       if (isCorrect) {
-        setPoints((prev) => prev + 10);
+        setScore((prev) => prev + 10);
       }
       setMatch((prev) => ({ ...prev, answered: true } as Match));
-      handleNextMatch();
     },
-    [handleNextMatch]
+    []
   );
   const handleNewQuestion = React.useCallback(() => {
     const question = getQuestion(user?.level);
@@ -57,12 +98,9 @@ const Game = () => {
   // // side effects
   React.useEffect(() => {
     if (match && !match.answered) return;
+    if (feedback) return;
     handleNewQuestion();
-  }, [match, handleNewQuestion]);
-  React.useEffect(() => {
-    if (!points) return;
-    handleRecord(points);
-  }, [points, handleRecord]);
+  }, [match, feedback, handleNewQuestion]);
   // UI
   return (
     <>
@@ -70,9 +108,9 @@ const Game = () => {
         <div>
           <GameHeader>
             <Text>Nível {user?.level}</Text>
-            <Text>Pontos: {points}</Text>
+            <Text>Pontos: {score}</Text>
           </GameHeader>
-          <LevelProgress currentQuestion={matchNumber} />
+          <LevelProgress matches={matches} currentMatch={matchNumber} />
           {match ? (
             <QuestionCard
               matchNumber={matchNumber}
@@ -90,7 +128,8 @@ const Game = () => {
       {feedback && (
         <FeedbackModal
           isCorrect={feedback.isCorrect}
-          onClose={() => setFeedback(undefined)}
+          upgradeLevel={shouldUpgradeLevel}
+          onClose={handleNextMatch}
         />
       )}
     </>
