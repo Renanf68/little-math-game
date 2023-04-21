@@ -1,47 +1,59 @@
 export interface CustomTheme {
   fontSize: {
-    xl: string;
-    lg: string;
-    md: string;
-    sm: string;
     xs: string;
+    sm: string;
+    md: string;
+    lg: string;
+    xl: string;
+    "2xl": string;
+    "3xl": string;
   };
   colors: {
-    primary: string;
-    gray: string;
-    lightGray: string;
-    lighterGray: string;
+    yellow: string;
+    lightYellow: string;
+    lighterYellow: string;
     red: string;
     lightRed: string;
     lighterRed: string;
     green: string;
     lightGreen: string;
+    lighterGreen: string;
     blue: string;
     lightBlue: string;
+    lighterBlue: string;
+    purple: string;
+    lightPurple: string;
+    lighterPurple: string;
   };
   borderRadius: string;
 }
 
 export const theme: CustomTheme = {
   fontSize: {
-    xl: '26px',
-    lg: '20px',
-    md: '16px',
-    sm: '14px',
-    xs: '10px',
+    xs: "0.875rem",
+    sm: "1rem",
+    md: "1.25rem",
+    lg: "1.5rem",
+    xl: "1.875rem",
+    "2xl": "2.25rem",
+    "3xl": "3rem",
   },
   colors: {
-    primary: 'black',
-    gray: '#979797',
-    lightGray: '#E9E9E9',
-    lighterGray: '#FAFAFA',
-    red: '#F85240',
-    lightRed: '#FFE0DD',
-    lighterRed: '#FFF2F0',
-    green: '#15C099',
-    lightGreen: '#E9FFFB',
-    blue: '#4E91FF',
-    lightBlue: '#E3EEFF',
+    yellow: "#FFB822",
+    lightYellow: "#FFD886",
+    lighterYellow: "#FFF6E3",
+    red: "#FC6B5E",
+    lightRed: "#FFA69E",
+    lighterRed: "#FFEBEA",
+    green: "#89DA57",
+    lightGreen: "#A1D681",
+    lighterGreen: "#ECFAE4",
+    blue: "#5CADFF",
+    lightBlue: "#98CBFF",
+    lighterBlue: "#ECF5FF",
+    purple: "#BD88FF",
+    lightPurple: "#DABDFF",
+    lighterPurple: "#F5EDFF",
   },
-  borderRadius: '6px',
+  borderRadius: "6px",
 };

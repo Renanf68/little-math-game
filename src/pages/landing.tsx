@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { PageLayout } from "../components/PageLayout";
+import logo from "../images/logo.png";
 
 const Landing = () => {
   return (
     <PageLayout>
       <div>
-        <h1>Jogo da Matemática</h1>
+        <img src={logo} alt="game logo" width="100%" />
         <Link to="/app">
           <Button>Começar</Button>
         </Link>

@@ -8,13 +8,24 @@ const Main = styled.main`
   align-items: center;
   width: 100vw;
   min-height: 100vh;
+  background-color: ${(props) => props.theme.colors.lighterBlue};
 `;
 
 const Container = styled.div`
   position: relative;
+  flex: 1;
   width: 100%;
-  max-width: 340px;
-  margin: 14px;
+  padding: 16px;
+  background-color: white;
+  border-radius: ${(props) => props.theme.borderRadius};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 768px) {
+    max-width: 390px;
+    max-height: 600px;
+  }
 `;
 
 interface PageLayoutProps {

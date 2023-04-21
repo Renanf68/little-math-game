@@ -3,6 +3,7 @@ import { Question } from "../types";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import React from "react";
+import { Heading } from "./Heading";
 
 const Card = styled.div`
   width: 100%;
@@ -63,7 +64,7 @@ export const QuestionCard = ({
   // UI
   return (
     <Card>
-      <h2>Q.{matchNumber}</h2>
+      <Heading>Pergunta {matchNumber}:</Heading>
       <Content>
         <OperationBox>
           <Operation>{question.operation}</Operation>

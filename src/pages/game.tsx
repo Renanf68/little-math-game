@@ -7,6 +7,9 @@ import React from "react";
 import { getQuestion } from "../utils";
 import { QuestionCard } from "../components/QuestionCard";
 import { FeedbackModal } from "../components/FeedbackModal";
+import { GameHeader } from "../components/GameHeader";
+import { Text } from "../components/Text";
+import { LevelProgress } from "../components/LevelProgress";
 
 interface Match {
   question: Question;
@@ -65,8 +68,11 @@ const Game = () => {
     <>
       <PageLayout>
         <div>
-          <h1>Nível {user?.level}</h1>
-          <h2>Pontos: {points}</h2>
+          <GameHeader>
+            <Text>Nível {user?.level}</Text>
+            <Text>Pontos: {points}</Text>
+          </GameHeader>
+          <LevelProgress currentQuestion={matchNumber} />
           {match ? (
             <QuestionCard
               matchNumber={matchNumber}
@@ -77,7 +83,7 @@ const Game = () => {
             <p>Carregando...</p>
           )}
           <Link to="/app">
-            <Button>Voltar</Button>
+            <Button variant="secondary">Voltar</Button>
           </Link>
         </div>
       </PageLayout>

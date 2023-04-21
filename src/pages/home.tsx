@@ -4,6 +4,9 @@ import { PageLayout } from "../components/PageLayout";
 import { useUserContext } from "../context";
 import { Input } from "../components/Input";
 import { Link } from "react-router-dom";
+import { Heading } from "../components/Heading";
+import { Text } from "../components/Text";
+import logo from "../images/logo.png";
 
 const Home = () => {
   // context
@@ -15,29 +18,30 @@ const Home = () => {
     handleUserName(username);
   };
   // UI
-  if (!user) {
-    return (
-      <PageLayout>
-        <h2>Olá!</h2>
-        <p>Me diz qual o seu nome?</p>
-        <Input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Button onClick={saveName}>Salvar</Button>
-      </PageLayout>
-    );
-  }
   return (
     <PageLayout>
       <div>
-        <h1>Jogo da Matemática</h1>
-        <h2>Olá, {user.name}!</h2>
-        <h2>Seu recorde atual é: {user.record}!</h2>
-        <Link to="game">
-          <Button>Jogar</Button>
-        </Link>
+        <img src={logo} alt="game logo" width="100%" />
+        {!user ? (
+          <>
+            <Heading>Olá!</Heading>
+            <Text>Me diz qual o seu nome?</Text>
+            <Input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Button onClick={saveName}>Salvar</Button>
+          </>
+        ) : (
+          <>
+            <Text>Olá, {user.name}!</Text>
+            <Text>Seu recorde atual é: {user.record}!</Text>
+            <Link to="game">
+              <Button>Jogar</Button>
+            </Link>
+          </>
+        )}
       </div>
     </PageLayout>
   );
