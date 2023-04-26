@@ -10,10 +10,14 @@ const randomIntFromInterval = (min: number, max: number) => {
 const operationOptions = ["+", "-", "x", ":"] as Operation[];
 
 const getOperation = (level: number): Operation => {
-  if (level === 1) return "+";
+  // levels 1, 2, 3 and 4 => only +
+  if (level <= 4) return "+";
+  // levels 5, 6 and 7 => + or -
   let max = 1;
-  if (level > 5 && level <= 7) max = 2;
-  if (level > 7) max = 3;
+  // levels 8 and 9 => +, - or x
+  if (level > 7 && level <= 9) max = 2;
+  // levels 10 above => +, -, x or :
+  if (level > 9) max = 3;
   const randomIndex = randomIntFromInterval(0, max);
   return operationOptions[randomIndex];
 };
@@ -32,30 +36,16 @@ const getIntroTerms = (level: number, operation: Operation): Terms => {
     term1 = randomIntFromInterval(0, 10);
     term2 = randomIntFromInterval(0, 10);
   } else if (level === 2) {
-    if (operation === "+") {
-      term1 = randomIntFromInterval(10, 20);
-      term2 = randomIntFromInterval(0, 10);
-    } else {
-      term1 = randomIntFromInterval(6, 12);
-      term2 = randomIntFromInterval(0, 6);
-    }
+    term1 = randomIntFromInterval(0, 12);
+    term2 = randomIntFromInterval(0, 10);
   } else if (level === 3) {
-    if (operation === "+") {
-      term1 = randomIntFromInterval(10, 30);
-      term2 = randomIntFromInterval(0, 15);
-    } else {
-      term1 = randomIntFromInterval(10, 20);
-      term2 = randomIntFromInterval(0, 10);
-    }
+    term1 = randomIntFromInterval(10, 20);
+    term2 = randomIntFromInterval(0, 10);
   } else if (level === 4) {
-    if (operation === "+") {
-      term1 = getTens();
-      term2 = randomIntFromInterval(0, 10);
-    } else {
-      term1 = getBigNumber();
-      term2 = randomIntFromInterval(0, 1);
-      if (term2 === 1) term2 = term1;
-    }
+    term1 = randomIntFromInterval(0, 20);
+    term2 = randomIntFromInterval(0, 10);
+    // term1 = getTens();
+    // term2 = randomIntFromInterval(0, 10);
   } else {
     if (operation === "+") {
       term1 = getBigNumber();

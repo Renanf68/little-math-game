@@ -24,6 +24,7 @@ export interface CustomTheme {
     purple: string;
     lightPurple: string;
     lighterPurple: string;
+    gray: string;
   };
   borderRadius: string;
 }
@@ -54,6 +55,7 @@ export const theme: CustomTheme = {
     purple: "#BD88FF",
     lightPurple: "#DABDFF",
     lighterPurple: "#F5EDFF",
+    gray: "#D5DFE5",
   },
   borderRadius: "6px",
 };

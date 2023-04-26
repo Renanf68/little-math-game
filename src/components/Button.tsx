@@ -22,8 +22,18 @@ const ButtonStyled = styled.button<ButtonProps>`
   &:hover {
     opacity: 0.8;
   }
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.gray};
+    cursor: not-allowed;
+  }
 `;
 
-export const Button = ({ variant = "primary", ...props }: ButtonProps) => {
-  return <ButtonStyled variant={variant} {...props} />;
-};
+// export const Button = ({ variant = "primary", ...props }: ButtonProps) => {
+//   return <ButtonStyled variant={variant} {...props} />;
+// };
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "primary", ...props }: ButtonProps, ref) => {
+    return <ButtonStyled ref={ref} variant={variant} {...props} />;
+  }
+);

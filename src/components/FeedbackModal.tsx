@@ -1,4 +1,5 @@
 // import styled from "styled-components";
+import React from "react";
 import { BaseModal } from "./BaseModal";
 import { Button } from "./Button";
 import { Heading } from "./Heading";
@@ -15,6 +16,13 @@ export const FeedbackModal = ({
   upgradeLevel,
   onClose,
 }: FeedbackModalProps) => {
+  // refs
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+  // side effects
+  React.useEffect(() => {
+    buttonRef.current?.focus();
+  }, []);
+  // UI
   return (
     <BaseModal>
       <Heading>Feedback!</Heading>
@@ -30,7 +38,9 @@ export const FeedbackModal = ({
       ) : (
         <></>
       )}
-      <Button onClick={onClose}>Continuar</Button>
+      <Button ref={buttonRef} onClick={onClose}>
+        Continuar
+      </Button>
     </BaseModal>
   );
 };

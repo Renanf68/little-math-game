@@ -58,9 +58,15 @@ export const QuestionCard = ({
     setResponse("");
     notifyResponse(matchNumber, isCorrect);
   };
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      reply();
+    }
+  };
   React.useEffect(() => {
     inputRef.current?.focus();
-  }, []);
+  }, [matchNumber]);
   // UI
   return (
     <Card>
@@ -70,8 +76,8 @@ export const QuestionCard = ({
           <Operation>{question.operation}</Operation>
         </OperationBox>
         <div>
-          <Term>{question.term1}</Term>
-          <Term>{question.term2}</Term>
+          <Term>{question.term1.toLocaleString()}</Term>
+          <Term>{question.term2.toLocaleString()}</Term>
         </div>
       </Content>
       <Input
@@ -79,8 +85,11 @@ export const QuestionCard = ({
         type="number"
         value={response}
         onChange={(e) => setResponse(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-      <Button onClick={reply}>Responder</Button>
+      <Button onClick={reply} disabled={response.length === 0}>
+        Responder
+      </Button>
     </Card>
   );
 };
