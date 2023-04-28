@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Matches } from "../pages/game";
+import { Matches } from "../types";
 
 interface ProgressBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   isCorrect?: boolean;

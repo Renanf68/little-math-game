@@ -1,29 +1,10 @@
-import { Link } from "react-router-dom";
-import { Button } from "../components/Button";
-import { PageLayout } from "../components/PageLayout";
-import { useUserContext } from "../context";
-import { Question } from "../types";
 import React from "react";
+import { useUserContext } from "../context";
+import { FeedBack, Match, Matches } from "../types";
 import { getQuestion } from "../utils";
 import { QuestionCard } from "../components/QuestionCard";
 import { FeedbackModal } from "../components/FeedbackModal";
-import { GameHeader } from "../components/GameHeader";
-import { Text } from "../components/Text";
-import { LevelProgress } from "../components/LevelProgress";
-
-interface Match {
-  question: Question;
-  answered?: boolean;
-}
-
-type FeedBack = {
-  isCorrect: boolean;
-};
-
-export type Matches = {
-  match: number;
-  isCorrect?: boolean;
-};
+import { GameLayout } from "../components/game";
 
 const levelMatches = 10;
 
@@ -41,6 +22,13 @@ const initialMatches = [
   { match: 9 },
   { match: 10 },
 ] as Matches[];
+
+// const fakeQ = {
+//   term1: 2400,
+//   term2: 12,
+//   operation: "+",
+//   result: 2412,
+// } as Question;
 
 const Game = () => {
   // context
@@ -104,27 +92,23 @@ const Game = () => {
   // UI
   return (
     <>
-      <PageLayout>
-        <div>
-          <GameHeader>
-            <Text>Nível {user?.level}</Text>
-            <Text>Pontos: {score}</Text>
-          </GameHeader>
-          <LevelProgress matches={matches} currentMatch={matchNumber} />
-          {match ? (
-            <QuestionCard
-              matchNumber={matchNumber}
-              question={match.question}
-              notifyResponse={handleResponse}
-            />
-          ) : (
-            <p>Carregando...</p>
-          )}
-          <Link to="/app">
-            <Button variant="secondary">Voltar</Button>
-          </Link>
-        </div>
-      </PageLayout>
+      <GameLayout
+        userLevel={user?.level}
+        userScore={score}
+        matches={matches}
+        currentMatch={matchNumber}
+      >
+        {match ? (
+          <QuestionCard
+            matchNumber={matchNumber}
+            question={match.question}
+            // question={fakeQ}
+            notifyResponse={handleResponse}
+          />
+        ) : (
+          <p>Carregando...</p>
+        )}
+      </GameLayout>
       {feedback && (
         <FeedbackModal
           isCorrect={feedback.isCorrect}

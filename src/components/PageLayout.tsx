@@ -14,7 +14,7 @@ const Main = styled.main`
 const Container = styled.div`
   position: relative;
   flex: 1;
-  width: 100%;
+  width: 90%;
   padding: 16px;
   background-color: white;
   border-radius: ${(props) => props.theme.borderRadius};

@@ -17,3 +17,17 @@ export type Terms = {
   term1: number;
   term2: number;
 };
+
+export interface Match {
+  question: Question;
+  answered?: boolean;
+}
+
+export type FeedBack = {
+  isCorrect: boolean;
+};
+
+export type Matches = {
+  match: number;
+  isCorrect?: boolean;
+};

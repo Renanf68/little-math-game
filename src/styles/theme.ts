@@ -35,9 +35,9 @@ export const theme: CustomTheme = {
     sm: "1rem",
     md: "1.25rem",
     lg: "1.5rem",
-    xl: "1.875rem",
-    "2xl": "2.25rem",
-    "3xl": "3rem",
+    xl: "3rem",
+    "2xl": "3.75rem",
+    "3xl": "4.5rem",
   },
   colors: {
     yellow: "#FFB822",
