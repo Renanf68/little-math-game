@@ -17,6 +17,15 @@ const Input = styled.input`
   font-size: ${(props) => props.theme.fontSize["2xl"]};
   text-align: end;
   margin-left: 6px;
+  /* appearance: textfield; */
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const Dot = styled.p`
@@ -82,6 +91,8 @@ export const QuestionInputGroup = ({
             ref={isLast ? inputRef : null}
             name={`user-input-${index}`}
             type="number"
+            // type="text"
+            // inputMode="numeric"
             value={responsesGroup[index]}
             onChange={(e) => handleInputValue(index, e.target.value)}
             onKeyDown={handleKeyDown}

@@ -6,6 +6,7 @@ import React from "react";
 import { Heading } from "./Heading";
 import { QuestionInputGroup } from "./QuestionInputGroup";
 import { Input } from "./Input";
+import { SwitchLayoutButton } from "./SwitchLayoutButton";
 
 const Card = styled.div`
   width: 100%;
@@ -14,11 +15,6 @@ const CardHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`;
-const SwitchBtn = styled.button`
-  margin-top: 16px;
-  width: 26px;
-  height: 26px;
 `;
 const OperationBoard = styled.div`
   width: 100%;
@@ -117,12 +113,19 @@ export const QuestionCard = ({
     const concat = responsesGroup.join("");
     setResponse(concat);
   }, [responsesGroup]);
+  React.useEffect(() => {
+    if (isGroup) return;
+    fullInputRef.current?.focus();
+  }, [matchNumber, isGroup]);
   // UI
   return (
     <Card>
       <CardHeader>
         <Heading>Pergunta {matchNumber}:</Heading>
-        <SwitchBtn onClick={() => setIsGroup((prev) => !prev)}>s</SwitchBtn>
+        <SwitchLayoutButton
+          isGroup={isGroup}
+          onClick={() => setIsGroup((prev) => !prev)}
+        />
       </CardHeader>
       <OperationBoard>
         <div>

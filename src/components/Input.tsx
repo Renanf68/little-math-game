@@ -15,6 +15,14 @@ const InputStyled = styled.input<InputProps>`
   font-size: ${(props) =>
     props.game ? props.theme.fontSize["2xl"] : props.theme.fontSize.lg};
   text-align: ${(props) => (props.type === "number" ? "end" : "start")};
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
