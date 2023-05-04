@@ -7,55 +7,61 @@ export interface CustomTheme {
     xl: string;
     "2xl": string;
     "3xl": string;
+    "4xl": string;
+    "5xl": string;
+    "6xl": string;
+    "7xl": string;
   };
   colors: {
-    yellow: string;
-    lightYellow: string;
-    lighterYellow: string;
-    red: string;
-    lightRed: string;
-    lighterRed: string;
-    green: string;
-    lightGreen: string;
-    lighterGreen: string;
-    blue: string;
-    lightBlue: string;
-    lighterBlue: string;
     purple: string;
     lightPurple: string;
     lighterPurple: string;
+    green: string;
+    lightGreen: string;
+    lighterGreen: string;
+    yellow: string;
+    lightYellow: string;
+    lighterYellow: string;
     gray: string;
+    lightGray: string;
+    lighterGray: string;
+    pink: string;
+    lightPink: string;
+    lighterPink: string;
   };
   borderRadius: string;
 }
 
 export const theme: CustomTheme = {
   fontSize: {
-    xs: "0.875rem",
-    sm: "1rem",
-    md: "1.25rem",
-    lg: "1.5rem",
-    xl: "3rem",
-    "2xl": "3.75rem",
-    "3xl": "4.5rem",
+    xs: "0.75rem",
+    sm: "0.875rem",
+    md: "1rem",
+    lg: "1.125rem",
+    xl: "1.25rem",
+    "2xl": "1.5rem",
+    "3xl": "1.875rem",
+    "4xl": "2.25rem",
+    "5xl": "3rem",
+    "6xl": "3.75rem",
+    "7xl": "4.5rem",
   },
   colors: {
-    yellow: "#FFB822",
-    lightYellow: "#FFD886",
-    lighterYellow: "#FFF6E3",
-    red: "#FC6B5E",
-    lightRed: "#FFA69E",
-    lighterRed: "#FFEBEA",
-    green: "#89DA57",
-    lightGreen: "#A1D681",
+    purple: "#8A88FF",
+    lightPurple: "#EBEBFF",
+    lighterPurple: "#F9F9FF",
+    green: "#71C83C",
+    lightGreen: "#DAFFC5",
     lighterGreen: "#ECFAE4",
-    blue: "#5CADFF",
-    lightBlue: "#98CBFF",
-    lighterBlue: "#ECF5FF",
-    purple: "#BD88FF",
-    lightPurple: "#DABDFF",
-    lighterPurple: "#F5EDFF",
-    gray: "#D5DFE5",
+    yellow: "#DDB420",
+    lightYellow: "#FFEFCD",
+    lighterYellow: "#FFF6E3",
+    gray: "#4D5157",
+    lightGray: "#A9A9A9",
+    lighterGray: "#EFEFEF",
+    pink: "#FFA4AC",
+    lightPink: "#FFE0DD",
+    lighterPink: "#FFF6F5",
   },
-  borderRadius: "6px",
+  borderRadius: "1000px",
 };

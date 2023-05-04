@@ -8,7 +8,7 @@ const GameFooterStyled = styled.div`
 `;
 
 const BackLink = styled(Link)`
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.theme.colors.purple};
   text-decoration: none;
   margin-bottom: 12px;
 `;

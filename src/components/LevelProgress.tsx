@@ -15,10 +15,10 @@ const ProgressBoxStyled = styled.div<ProgressBoxProps>`
     props.isCorrect
       ? props.theme.colors.green
       : props.isCorrect === false
-      ? props.theme.colors.red
+      ? props.theme.colors.pink
       : props.isCurrent
-      ? props.theme.colors.blue
-      : props.theme.colors.lighterBlue};
+      ? props.theme.colors.purple
+      : props.theme.colors.lighterPurple};
   border-radius: 4px;
 `;
 

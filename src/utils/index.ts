@@ -33,11 +33,11 @@ const getIntroTerms = (level: number, operation: Operation): Terms => {
   let term1;
   let term2;
   if (level === 1) {
-    term1 = randomIntFromInterval(0, 10);
-    term2 = randomIntFromInterval(0, 10);
+    term1 = randomIntFromInterval(0, 9);
+    term2 = randomIntFromInterval(0, 6);
   } else if (level === 2) {
     term1 = randomIntFromInterval(0, 12);
-    term2 = randomIntFromInterval(0, 10);
+    term2 = randomIntFromInterval(0, 8);
   } else if (level === 3) {
     term1 = randomIntFromInterval(10, 20);
     term2 = randomIntFromInterval(0, 10);

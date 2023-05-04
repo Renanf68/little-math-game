@@ -1,23 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { IconType } from "../types";
+import { Icon } from "./Icon";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
+  icon?: IconType;
 }
 
 const ButtonStyled = styled.button<ButtonProps>`
   margin-top: 14px;
   width: 100%;
-  height: 50px;
+  height: 40px;
   border-radius: ${(props) => props.theme.borderRadius};
   background-color: ${(props) =>
-    props.variant === "primary"
-      ? props.theme.colors.green
-      : props.theme.colors.blue};
+    props.variant === "primary" ? props.theme.colors.purple : "none"};
   color: white;
   border: none;
-  font-size: ${(props) => props.theme.fontSize.sm};
-  font-weight: 700;
+  font-size: ${(props) => props.theme.fontSize.xl};
+  font-weight: 400;
   cursor: pointer;
   &:hover {
     opacity: 0.8;
@@ -33,7 +34,12 @@ const ButtonStyled = styled.button<ButtonProps>`
 // };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", ...props }: ButtonProps, ref) => {
-    return <ButtonStyled ref={ref} variant={variant} {...props} />;
+  ({ variant = "primary", icon, children, ...props }: ButtonProps, ref) => {
+    return (
+      <ButtonStyled ref={ref} variant={variant} {...props}>
+        {icon && <Icon icon={icon} />}
+        {children}
+      </ButtonStyled>
+    );
   }
 );

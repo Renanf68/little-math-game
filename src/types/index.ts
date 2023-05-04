@@ -1,3 +1,18 @@
+import { DefaultTheme } from "styled-components";
+
+export interface BaseTextProps<T> extends React.HTMLAttributes<T> {
+  marginTop?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  marginBottom?: string;
+  fontSize?: keyof DefaultTheme["fontSize"];
+  fontWeight?: string;
+  lineHeight?: string;
+  textAlign?: string;
+  color?: string;
+}
+
+export type IconType = "play" | "plus" | "back" | "config" | "check" | "ray";
 export interface User {
   name?: string;
   record?: number;
