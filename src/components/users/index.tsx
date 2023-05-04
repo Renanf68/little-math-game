@@ -24,6 +24,24 @@ const NewProfileBtn = styled.div`
   cursor: pointer;
 `;
 
+const Flex = styled.div`
+  margin-top: 16px;
+  padding: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  width: fill-available;
+  min-height: 112px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonsFlex = styled.div`
+  width: fill-available;
+  display: flex;
+`;
+
 export const Users = () => {
   // context
   const theme = useTheme();
@@ -43,14 +61,38 @@ export const Users = () => {
   if (users?.length === 0 || isNew) {
     return (
       <UsersFlex>
-        <Heading>Olá!</Heading>
-        <Text>Me diz qual o seu nome?</Text>
-        <Input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Button onClick={saveName}>Salvar</Button>
+        <div style={{ width: "100%" }}>
+          <Heading fontSize="5xl" marginBottom="36px">
+            Olá!
+          </Heading>
+          <Flex>
+            <Text fontSize="xl" fontWeight="500">
+              Me diz qual o seu nome?
+            </Text>
+            <Input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Flex>
+          <Flex>
+            <Text fontSize="xl" fontWeight="500">
+              Qual a sua idade?
+            </Text>
+          </Flex>
+        </div>
+        <ButtonsFlex>
+          <Button variant="secondary" onClick={() => setIsNew(false)}>
+            Voltar
+          </Button>
+          <Button
+            marginLeft="14px"
+            onClick={saveName}
+            disabled={username.length === 0}
+          >
+            Salvar
+          </Button>
+        </ButtonsFlex>
       </UsersFlex>
     );
   }

@@ -7,7 +7,10 @@ const HeadingStyled = styled.h1<BaseTextProps<HTMLHeadingElement>>`
   margin-bottom: ${(props) => props.marginBottom ?? 0};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
-  font-size: ${(props) => props.fontSize ?? props.theme.fontSize["4xl"]};
+  font-size: ${(props) =>
+    props.fontSize
+      ? props.theme.fontSize[props.fontSize]
+      : props.theme.fontSize["4xl"]};
   font-weight: ${(props) => props.fontWeight ?? 500};
   line-height: ${(props) => props.lineHeight};
   text-align: ${(props) => props.textAlign};

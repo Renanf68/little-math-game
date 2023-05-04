@@ -6,17 +6,25 @@ import { Icon } from "./Icon";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   icon?: IconType;
+  marginTop?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  marginBottom?: string;
 }
 
 const ButtonStyled = styled.button<ButtonProps>`
-  margin-top: 14px;
+  margin-top: ${(props) => props.marginTop ?? 0};
+  margin-bottom: ${(props) => props.marginBottom ?? 0};
+  margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
   width: 100%;
   height: 40px;
   border-radius: ${(props) => props.theme.borderRadius};
   background-color: ${(props) =>
-    props.variant === "primary" ? props.theme.colors.purple : "none"};
-  color: white;
-  border: none;
+    props.variant === "primary" ? props.theme.colors.purple : "transparent"};
+  color: ${(props) =>
+    props.variant === "primary" ? "white" : props.theme.colors.purple};
+  border: ${(props) => (props.variant === "primary" ? "none" : "1px solid")};
   font-size: ${(props) => props.theme.fontSize.xl};
   font-weight: 400;
   cursor: pointer;
@@ -24,7 +32,7 @@ const ButtonStyled = styled.button<ButtonProps>`
     opacity: 0.8;
   }
   &:disabled {
-    background-color: ${(props) => props.theme.colors.gray};
+    background-color: ${(props) => props.theme.colors.lightPurple};
     cursor: not-allowed;
   }
 `;
