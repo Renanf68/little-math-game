@@ -7,6 +7,7 @@ import { Text } from "../Text";
 import { UserCard } from "./UserCard";
 import styled, { useTheme } from "styled-components";
 import { Icon } from "../Icon";
+import { AgeSelect } from "./AgeSelect";
 
 const UsersFlex = styled.div`
   flex: 1;
@@ -45,24 +46,25 @@ const ButtonsFlex = styled.div`
 export const Users = () => {
   // context
   const theme = useTheme();
-  const { users, handleUserName } = useUserContext();
+  const { users, handleNewUser } = useUserContext();
   // state
   const [isNew, setIsNew] = React.useState(false);
   const [username, setUsername] = React.useState("");
+  const [userAge, setUserAge] = React.useState<number>();
   // handlers
-  const saveName = () => {
+  const saveUser = () => {
     if (users?.find((user) => user.name === username)) {
       alert("Já existe um jogador com esse nome. Escolhe outro?");
       return;
     }
-    handleUserName(username);
+    handleNewUser(username, userAge!);
   };
   // UI
   if (users?.length === 0 || isNew) {
     return (
       <UsersFlex>
         <div style={{ width: "100%" }}>
-          <Heading fontSize="5xl" marginBottom="36px">
+          <Heading fontSize="5xl" marginBottom="24px">
             Olá!
           </Heading>
           <Flex>
@@ -75,11 +77,10 @@ export const Users = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </Flex>
-          <Flex>
-            <Text fontSize="xl" fontWeight="500">
-              Qual a sua idade?
-            </Text>
-          </Flex>
+          <AgeSelect
+            selected={userAge}
+            onSelect={(value) => setUserAge(value)}
+          />
         </div>
         <ButtonsFlex>
           <Button variant="secondary" onClick={() => setIsNew(false)}>
@@ -87,8 +88,8 @@ export const Users = () => {
           </Button>
           <Button
             marginLeft="14px"
-            onClick={saveName}
-            disabled={username.length === 0}
+            onClick={saveUser}
+            disabled={username.length === 0 || !userAge}
           >
             Salvar
           </Button>

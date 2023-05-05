@@ -32,7 +32,7 @@ const Landing = () => {
         <img src={logo} alt="game logo" width="200px" />
         <ContentDiv>
           <Heading lineHeight="3.5rem">Boas-vindas!</Heading>
-          <Text lineHeight="3rem">Vamos começar?</Text>
+          <Text marginBottom="56px">Vamos começar?</Text>
           <Link to="/app" style={{ width: "100%" }}>
             <Button icon="play">Começar</Button>
           </Link>

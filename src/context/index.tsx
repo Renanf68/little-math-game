@@ -7,7 +7,7 @@ interface UserContextProps {
   users?: User[];
   user?: User;
   handleUserSelect(user: User): void;
-  handleUserName(name: string): void;
+  handleNewUser(name: string, age: number): void;
   handleRecord(total: number): void;
   upgradeLevel(): void;
 }
@@ -24,9 +24,10 @@ export const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = React.useState<User[]>();
   const [user, setUser] = React.useState<User>();
   // handlers
-  const handleUserName = React.useCallback((name: string) => {
+  const handleNewUser = React.useCallback((name: string, age: number) => {
     const newUser = {
       name,
+      age,
       record: 0,
       level: 1,
     } as User;
@@ -79,7 +80,7 @@ export const UserProvider = ({ children }: Props) => {
         users,
         user,
         handleUserSelect,
-        handleUserName,
+        handleNewUser,
         handleRecord,
         upgradeLevel,
       }}
