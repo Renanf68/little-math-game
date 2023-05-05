@@ -6,6 +6,7 @@ const storageKey = "little-math-game-users";
 interface UserContextProps {
   users?: User[];
   user?: User;
+  clearUser(): void;
   handleUserSelect(user: User): void;
   handleNewUser(name: string, age: number): void;
   handleRecord(total: number): void;
@@ -37,6 +38,9 @@ export const UserProvider = ({ children }: Props) => {
       return updated;
     });
     setUser(newUser);
+  }, []);
+  const clearUser = React.useCallback(() => {
+    setUser(undefined);
   }, []);
   const handleUserSelect = React.useCallback((user: User) => {
     setUser(user);
@@ -79,6 +83,7 @@ export const UserProvider = ({ children }: Props) => {
       value={{
         users,
         user,
+        clearUser,
         handleUserSelect,
         handleNewUser,
         handleRecord,

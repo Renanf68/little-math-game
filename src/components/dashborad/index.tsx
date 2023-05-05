@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useUserContext } from "../../context";
 import { Text } from "../Text";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import { getUserAvatar } from "../../utils/ages";
 import { ActionsFooter } from "../ActionsFooter";
@@ -22,6 +22,7 @@ const Header = styled.div`
 
 export const Dashboard = () => {
   // context
+  const navigate = useNavigate();
   const { user } = useUserContext();
   // helpers
   const avatar = React.useMemo(() => {
@@ -43,7 +44,13 @@ export const Dashboard = () => {
         <Text>Você está no nível: {user!.level}!</Text>
         <Text>Seu recorde atual é: {user!.record}!</Text>
       </div>
-      <ActionsFooter backLink="/users" onAction={() => redirect("/game")} />
+      <ActionsFooter
+        backLink="/"
+        onAction={() => {
+          console.log("CALLLLL");
+          navigate("game");
+        }}
+      />
     </DashboardStyled>
   );
 };

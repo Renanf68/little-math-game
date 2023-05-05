@@ -6,6 +6,8 @@ import landingImage from "../images/landing.png";
 import styled from "styled-components";
 import { Heading } from "../components/Heading";
 import { Text } from "../components/Text";
+import { useUserContext } from "../context";
+import React from "react";
 
 const LandingFlex = styled.div`
   flex: 1;
@@ -26,6 +28,11 @@ const ContentDiv = styled.div`
 `;
 
 const Landing = () => {
+  const { user, clearUser } = useUserContext();
+  React.useEffect(() => {
+    if (!user) return;
+    clearUser();
+  }, [user, clearUser]);
   return (
     <PageLayout backgroundImage={landingImage}>
       <LandingFlex>
