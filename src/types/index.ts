@@ -12,9 +12,16 @@ export interface BaseTextProps<T> extends React.HTMLAttributes<T> {
   color?: string;
 }
 
-export type IconType = "play" | "plus" | "back" | "config" | "check" | "ray";
+export type IconType =
+  | "play"
+  | "plus"
+  | "back"
+  | "settings"
+  | "check"
+  | "flash";
 export interface User {
   name?: string;
+  age?: number;
   record?: number;
   level?: number;
 }

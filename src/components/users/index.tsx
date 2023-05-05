@@ -106,7 +106,7 @@ export const Users = () => {
         ))}
       </div>
       <NewProfileBtn onClick={() => setIsNew(true)}>
-        <Icon icon="plus" />
+        <Icon as="plus" />
         <Text fontSize="xl" color={theme.colors.purple}>
           Criar novo perfil
         </Text>

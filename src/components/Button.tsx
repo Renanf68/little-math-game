@@ -45,7 +45,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = "primary", icon, children, ...props }: ButtonProps, ref) => {
     return (
       <ButtonStyled ref={ref} variant={variant} {...props}>
-        {icon && <Icon icon={icon} />}
+        {icon && <Icon as={icon} />}
         {children}
       </ButtonStyled>
     );

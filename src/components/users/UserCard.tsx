@@ -6,12 +6,12 @@ import { User } from "../../types";
 import { useUserContext } from "../../context";
 
 const UserCardStyled = styled.div`
-  margin-top: 16px;
+  margin-top: 24px;
   width: fill-available;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 14px;
+  padding: 24px 14px;
   background-color: white;
   cursor: pointer;
 `;
