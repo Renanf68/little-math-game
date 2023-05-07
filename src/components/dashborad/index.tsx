@@ -7,6 +7,7 @@ import { getUserAvatar } from "../../utils/ages";
 import { ActionsFooter } from "../ActionsFooter";
 import { LevelBox } from "./LevelBox";
 import { RecordBox } from "./RecordBox";
+import { FlashBox } from "./FlashBox";
 
 const DashboardStyled = styled.div`
   position: relative;
@@ -52,6 +53,7 @@ export const Dashboard = () => {
           <LevelBox level={user?.level ?? 1} />
           <RecordBox record={user?.record ?? 0} />
         </BoxDivider>
+        <FlashBox power={80} />
       </div>
       <ActionsFooter
         backLink="/"

@@ -13,6 +13,7 @@ const Main = styled.main`
 
 interface ContainerProps {
   backgroundImage?: string;
+  backgroundColor?: string;
 }
 
 const Container = styled.div<ContainerProps>`
@@ -20,7 +21,6 @@ const Container = styled.div<ContainerProps>`
   flex: 1;
   width: 90%;
   padding: 16px;
-  background-color: white;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@ const Container = styled.div<ContainerProps>`
     props.backgroundImage ? `url(${props.backgroundImage})` : "none"};
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: ${(props) => props.theme.colors.lighterPurple};
+  background-color: ${(props) => props.backgroundColor ?? "white"};
   @media (min-width: 768px) {
     max-width: 390px;
     max-height: 700px;
@@ -40,12 +40,22 @@ const Container = styled.div<ContainerProps>`
 interface PageLayoutProps {
   children: React.ReactNode;
   backgroundImage?: string;
+  backgroundColor?: string;
 }
 
-export const PageLayout = ({ backgroundImage, children }: PageLayoutProps) => {
+export const PageLayout = ({
+  backgroundColor,
+  backgroundImage,
+  children,
+}: PageLayoutProps) => {
   return (
     <Main>
-      <Container backgroundImage={backgroundImage}>{children}</Container>
+      <Container
+        backgroundColor={backgroundColor}
+        backgroundImage={backgroundImage}
+      >
+        {children}
+      </Container>
     </Main>
   );
 };

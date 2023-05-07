@@ -32,14 +32,14 @@ export const RecordBox = ({ record }: RecordBoxProps) => {
   const theme = useTheme();
   return (
     <BoxStyled>
-      <Text fontSize="md" fontWeight="500" color={theme.colors.gray}>
+      <Text fontSize="md" fontWeight="500">
         Pontos
       </Text>
       <Text fontSize="4xl" fontWeight="500" color={theme.colors.green}>
         {record}
       </Text>
       <ImageBox>
-        <img src={diamond} alt="pequeno diamante" width="100%" />
+        <img src={diamond} alt="diamante de recorde" width="100%" />
       </ImageBox>
     </BoxStyled>
   );

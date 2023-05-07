@@ -31,7 +31,7 @@ export const LevelBox = ({ level }: LevelBoxProps) => {
   const theme = useTheme();
   return (
     <BoxStyled>
-      <Text fontSize="md" fontWeight="500" color={theme.colors.gray}>
+      <Text fontSize="md" fontWeight="500">
         Nível
       </Text>
       <Text fontSize="4xl" fontWeight="500" color={theme.colors.yellow}>
