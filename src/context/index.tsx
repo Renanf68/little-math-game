@@ -10,6 +10,7 @@ interface UserContextProps {
   handleUserSelect(user: User): void;
   handleNewUser(name: string, age: number): void;
   handleRecord(total: number): void;
+  handlePower(total: number): void;
   upgradeLevel(): void;
 }
 
@@ -31,6 +32,7 @@ export const UserProvider = ({ children }: Props) => {
       age,
       record: 0,
       level: 1,
+      power: 0,
     } as User;
     setUsers((prev) => {
       const updated = prev ?? [];
@@ -47,12 +49,18 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
   const handleRecord = React.useCallback((total: number) => {
     setUser((prev) => ({
-      ...prev,
+      ...prev!,
       record: (prev?.record ?? 0) + total,
     }));
   }, []);
+  const handlePower = React.useCallback((total: number) => {
+    setUser((prev) => ({
+      ...prev!,
+      power: (prev?.power ?? 0) + total,
+    }));
+  }, []);
   const upgradeLevel = React.useCallback(() => {
-    setUser((prev) => ({ ...prev, level: (prev?.level ?? 0) + 1 }));
+    setUser((prev) => ({ ...prev!, level: (prev?.level ?? 0) + 1 }));
   }, []);
   // side effects
   React.useEffect(() => {
@@ -87,6 +95,7 @@ export const UserProvider = ({ children }: Props) => {
         handleUserSelect,
         handleNewUser,
         handleRecord,
+        handlePower,
         upgradeLevel,
       }}
     >

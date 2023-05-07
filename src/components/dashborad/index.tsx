@@ -8,6 +8,7 @@ import { ActionsFooter } from "../ActionsFooter";
 import { LevelBox } from "./LevelBox";
 import { RecordBox } from "./RecordBox";
 import { FlashBox } from "./FlashBox";
+import { ThermoBox } from "./ThermoBox";
 
 const DashboardStyled = styled.div`
   position: relative;
@@ -50,18 +51,13 @@ export const Dashboard = () => {
           </Text>
         </Header>
         <BoxDivider>
-          <LevelBox level={user?.level ?? 1} />
-          <RecordBox record={user?.record ?? 0} />
+          <LevelBox level={user!.level} />
+          <RecordBox record={user!.record} />
         </BoxDivider>
-        <FlashBox power={80} />
+        <FlashBox power={user!.power} />
+        <ThermoBox difficulty={user!.level} />
       </div>
-      <ActionsFooter
-        backLink="/"
-        onAction={() => {
-          console.log("CALLLLL");
-          navigate("game");
-        }}
-      />
+      <ActionsFooter backLink="/" onAction={() => navigate("game")} />
     </DashboardStyled>
   );
 };

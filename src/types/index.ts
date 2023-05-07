@@ -20,10 +20,11 @@ export type IconType =
   | "check"
   | "flash";
 export interface User {
-  name?: string;
-  age?: number;
-  record?: number;
-  level?: number;
+  name: string;
+  age: number;
+  record: number;
+  level: number;
+  power: number;
 }
 
 export type Operation = "+" | "-" | "x" | ":";
