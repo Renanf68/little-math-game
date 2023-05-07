@@ -32,13 +32,16 @@ const initialMatches = [
 
 const Game = () => {
   // context
-  const { user, handleRecord, upgradeLevel } = useUserContext();
+  const { user, handlePower, handleRecord, upgradeLevel } = useUserContext();
   // state
   const [score, setScore] = React.useState(0);
   const [matches, setMatches] = React.useState<Matches[]>(initialMatches);
   const [match, setMatch] = React.useState<Match>();
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
+  // current response
+  // state
+  const [response, setResponse] = React.useState("");
   // helpers
   const shouldUpgradeLevel = React.useMemo(() => {
     if (matchNumber === levelMatches) {
@@ -61,22 +64,26 @@ const Game = () => {
     }
     setFeedback(undefined);
   }, [matchNumber, score, handleRecord, upgradeLevel]);
-  const handleResponse = React.useCallback(
-    (match: number, isCorrect: boolean) => {
-      setMatches((prev) =>
-        prev.map((i) => {
-          if (i.match === match) return { ...i, isCorrect };
-          return i;
-        })
-      );
-      setFeedback({ isCorrect });
-      if (isCorrect) {
-        setScore((prev) => prev + 10);
-      }
-      setMatch((prev) => ({ ...prev, answered: true } as Match));
-    },
-    []
-  );
+  const handleResponse = React.useCallback(() => {
+    const responseInt = parseInt(response);
+    let isCorrect = false;
+    if (responseInt === match?.question.result) {
+      isCorrect = true;
+    }
+    setResponse("");
+    setMatches((prev) =>
+      prev.map((i) => {
+        if (i.match === matchNumber) return { ...i, isCorrect };
+        return i;
+      })
+    );
+    setFeedback({ isCorrect });
+    if (isCorrect) {
+      setScore((prev) => prev + 10);
+      handlePower(10);
+    }
+    setMatch((prev) => ({ ...prev, answered: true } as Match));
+  }, [handlePower, response, match?.question.result, matchNumber]);
   const handleNewQuestion = React.useCallback(() => {
     const question = getQuestion(user?.level);
     setMatch({
@@ -97,13 +104,15 @@ const Game = () => {
         userScore={score}
         matches={matches}
         currentMatch={matchNumber}
+        onAction={handleResponse}
       >
         {match ? (
           <QuestionCard
             matchNumber={matchNumber}
             question={match.question}
-            // question={fakeQ}
-            notifyResponse={handleResponse}
+            response={response}
+            notifyResponse={setResponse}
+            reply={handleResponse}
           />
         ) : (
           <p>Carregando...</p>

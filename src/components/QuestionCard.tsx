@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Question } from "../types";
-import { Button } from "./Button";
 // import { Input } from "./Input";
 import React from "react";
 import { Heading } from "./Heading";
@@ -54,16 +53,19 @@ const Operation = styled.p`
 interface QuestionCardProps {
   matchNumber: number;
   question: Question;
-  notifyResponse(match: number, isCorrect: boolean): void;
+  response: string;
+  notifyResponse(response: string): void;
+  reply(): void;
 }
 
 export const QuestionCard = ({
   matchNumber,
   question,
+  response,
   notifyResponse,
+  reply,
 }: QuestionCardProps) => {
   // state
-  const [response, setResponse] = React.useState("");
   const [responsesGroup, setResponsesGroup] = React.useState<string[]>([]);
   const [isGroup, setIsGroup] = React.useState(false);
   // refs
@@ -90,16 +92,6 @@ export const QuestionCard = ({
     },
     []
   );
-  const reply = () => {
-    console.group("response: ", response);
-    const responseInt = parseInt(response);
-    let isCorrect = false;
-    if (responseInt === question.result) {
-      isCorrect = true;
-    }
-    setResponse("");
-    notifyResponse(matchNumber, isCorrect);
-  };
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
@@ -111,8 +103,8 @@ export const QuestionCard = ({
   }, [initializeResponsesGroup, matchNumber]);
   React.useEffect(() => {
     const concat = responsesGroup.join("");
-    setResponse(concat);
-  }, [responsesGroup]);
+    notifyResponse(concat);
+  }, [responsesGroup, notifyResponse]);
   React.useEffect(() => {
     if (isGroup) return;
     fullInputRef.current?.focus();
@@ -151,16 +143,13 @@ export const QuestionCard = ({
               ref={fullInputRef}
               type="number"
               value={response}
-              onChange={(e) => setResponse(e.target.value)}
+              onChange={(e) => notifyResponse(e.target.value)}
               onKeyDown={handleKeyDown}
               game
             />
           )}
         </div>
       </OperationBoard>
-      <Button onClick={reply} disabled={response.length === 0}>
-        Responder
-      </Button>
     </Card>
   );
 };

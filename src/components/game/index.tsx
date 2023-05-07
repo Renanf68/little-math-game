@@ -1,11 +1,11 @@
 import React from "react";
-import { GameFooter } from "./GameFooter";
 import { GameHeader } from "./GameHeader";
 import { LevelProgress } from "../LevelProgress";
 import { PageLayout } from "../PageLayout";
 import { Text } from "../Text";
 import styled from "styled-components";
 import { Matches } from "../../types";
+import { ActionsFooter } from "../ActionsFooter";
 
 const GameLayoutStyled = styled.div`
   flex: 1;
@@ -20,6 +20,7 @@ interface GameLayoutProps {
   userScore: number;
   matches: Matches[];
   currentMatch: number;
+  onAction(): void;
   children: React.ReactNode;
 }
 
@@ -28,6 +29,7 @@ export const GameLayout = ({
   userScore,
   matches,
   currentMatch,
+  onAction,
   children,
 }: GameLayoutProps) => {
   return (
@@ -41,7 +43,7 @@ export const GameLayout = ({
           <LevelProgress matches={matches} currentMatch={currentMatch} />
         </div>
         {children}
-        <GameFooter />
+        <ActionsFooter backLink="/app" onAction={onAction} isGame />
       </GameLayoutStyled>
     </PageLayout>
   );

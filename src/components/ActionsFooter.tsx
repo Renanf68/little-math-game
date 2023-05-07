@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Icon } from "./Icon";
 import { ReactComponent as play } from "../images/play.svg";
+import { ReactComponent as check } from "../images/check.svg";
 import { FlashButton } from "./FlashButton";
 
 const ActionsFooterStyled = styled.div`
@@ -29,6 +30,10 @@ const BackBtn = styled.button`
   cursor: pointer;
 `;
 export const PlayIcon = styled(play)`
+  width: 32px;
+  height: 32px;
+`;
+export const CheckIcon = styled(check)`
   width: 32px;
   height: 32px;
 `;
@@ -76,7 +81,7 @@ export const ActionsFooter = ({
         </BackBtn>
       </Link>
       <ActionBtn onClick={onAction}>
-        <PlayIcon />
+        {isGame ? <CheckIcon /> : <PlayIcon />}
       </ActionBtn>
       {isGame ? (
         <FlashButton onAction={() => {}} />
