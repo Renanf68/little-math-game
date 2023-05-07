@@ -1,9 +1,10 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import number6 from "../../images/number6.png";
-import diamond from "../../images/diamond.png";
 import { Text } from "../Text";
 import { User } from "../../types";
 import { useUserContext } from "../../context";
+import { LevelBadge } from "../LevelBadge";
+import { ScoreBadge } from "../ScoreBadge";
 
 const UserCardStyled = styled.div`
   margin-top: 24px;
@@ -34,44 +35,12 @@ const BoxesFlex = styled.div`
   display: flex;
 `;
 
-const BoxesDiamondBox = styled.div`
-  width: 12px;
-  height: auto;
-  margin-right: 8px;
-`;
-
-const LevelBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 50px;
-  height: 32px;
-  padding-left: 8px;
-  padding-right: 8px;
-  background-color: ${(props) => props.theme.colors.lightYellow};
-  border-radius: 10px;
-`;
-
-const ScoreBox = styled.div`
-  margin-left: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 50px;
-  height: 32px;
-  padding-left: 8px;
-  padding-right: 8px;
-  background-color: ${(props) => props.theme.colors.lightGreen};
-  border-radius: 10px;
-`;
-
 interface UserCardProps {
   user: User;
 }
 
 export const UserCard = ({ user }: UserCardProps) => {
   // context
-  const theme = useTheme();
   const { handleUserSelect } = useUserContext();
   // UI
   return (
@@ -84,19 +53,8 @@ export const UserCard = ({ user }: UserCardProps) => {
           {user.name}
         </Text>
         <BoxesFlex>
-          <LevelBox>
-            <Text fontSize="xs" color={theme.colors.yellow}>
-              Nível {user.level}
-            </Text>
-          </LevelBox>
-          <ScoreBox>
-            <BoxesDiamondBox>
-              <img src={diamond} alt="pequeno diamante" width="100%" />
-            </BoxesDiamondBox>
-            <Text fontSize="xs" color={theme.colors.green}>
-              {user.record}
-            </Text>
-          </ScoreBox>
+          <LevelBadge level={user.level ?? 1} />
+          <ScoreBadge score={user.record ?? 0} />
         </BoxesFlex>
       </UserInfosFlex>
     </UserCardStyled>

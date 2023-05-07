@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { getUserAvatar } from "../../utils/ages";
 import { ActionsFooter } from "../ActionsFooter";
+import { LevelBox } from "./LevelBox";
+import { RecordBox } from "./RecordBox";
 
 const DashboardStyled = styled.div`
   position: relative;
@@ -18,6 +20,11 @@ const DashboardStyled = styled.div`
 const Header = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const BoxDivider = styled.div`
+  margin-top: 16px;
+  display: flex;
 `;
 
 export const Dashboard = () => {
@@ -41,8 +48,10 @@ export const Dashboard = () => {
             Olá, {user!.name}!
           </Text>
         </Header>
-        <Text>Você está no nível: {user!.level}!</Text>
-        <Text>Seu recorde atual é: {user!.record}!</Text>
+        <BoxDivider>
+          <LevelBox level={user?.level ?? 1} />
+          <RecordBox record={user?.record ?? 0} />
+        </BoxDivider>
       </div>
       <ActionsFooter
         backLink="/"
