@@ -12,9 +12,10 @@ const InputStyled = styled.input<InputProps>`
   border-color: ${(props) => props.theme.colors.lightGray};
   padding: 0 14px;
   width: ${(props) => (props.game ? "90%" : "fill-available")};
-  height: ${(props) => (props.game ? "78px" : "60px")};
+  height: ${(props) => (props.game ? "68px" : "60px")};
   font-size: ${(props) =>
-    props.game ? props.theme.fontSize["7xl"] : props.theme.fontSize.lg};
+    props.game ? props.theme.fontSize["4xl"] : props.theme.fontSize["2xl"]};
+  letter-spacing: ${(props) => (props.game ? "0.4rem" : "")};
   color: ${(props) => props.theme.colors.gray};
   text-align: ${(props) => (props.type === "number" ? "end" : "start")};
   :focus {

@@ -9,15 +9,14 @@ const GroupWrapper = styled.div`
 `;
 
 const Input = styled.input`
-  padding-right: 12px;
   width: 48px;
-  height: 78px;
+  height: 68px;
   border: 1px solid;
   border-color: ${(props) => props.theme.colors.lightGray};
   border-radius: 1000px;
-  font-size: ${(props) => props.theme.fontSize["6xl"]};
+  font-size: ${(props) => props.theme.fontSize["4xl"]};
   color: ${(props) => props.theme.colors.gray};
-  text-align: end;
+  text-align: center;
   margin-left: 6px;
   :focus {
     outline: none;

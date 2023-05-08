@@ -8,9 +8,9 @@ interface SwitchLayoutButtonProps
 const SwitchBtn = styled.button`
   margin-top: 16px;
   margin-right: 16px;
-  width: 60px;
-  min-width: 78px;
-  height: 78px;
+  width: 68px;
+  min-width: 68px;
+  height: 68px;
   padding: 10px;
   display: flex;
   justify-content: center;
