@@ -7,6 +7,7 @@ import {
 import Home from "../pages/home";
 import Landing from "../pages/landing";
 import Game from "../pages/game";
+import Settings from "../pages/settings";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Landing />} />
       <Route path="/app" element={<Home />} />
       <Route path="/app/game" element={<Game />} />
+      <Route path="/app/settings" element={<Settings />} />
     </>
   )
 );

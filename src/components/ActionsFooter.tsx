@@ -86,9 +86,11 @@ export const ActionsFooter = ({
       {isGame ? (
         <FlashButton />
       ) : (
-        <SettingsBtn>
-          <Icon as="settings" />
-        </SettingsBtn>
+        <Link to="/app/settings">
+          <SettingsBtn>
+            <Icon as="settings" />
+          </SettingsBtn>
+        </Link>
       )}
     </ActionsFooterStyled>
   );
