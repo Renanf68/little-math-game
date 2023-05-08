@@ -29,6 +29,7 @@ const Container = styled.div<ContainerProps>`
   background-image: ${(props) =>
     props.backgroundImage ? `url(${props.backgroundImage})` : "none"};
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   background-color: ${(props) => props.backgroundColor ?? "white"};
   @media (min-width: 768px) {
