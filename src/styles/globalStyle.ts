@@ -11,4 +11,8 @@ export const GlobalStyle = createGlobalStyle`
   code {
     font-family: 'Fredoka', monospace;
   }
+  input {
+    font-family: 'Fredoka', monospace;
+    font-weight: 500;
+  }
 `;

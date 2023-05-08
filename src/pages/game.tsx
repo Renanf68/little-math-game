@@ -32,7 +32,14 @@ const initialMatches = [
 
 const Game = () => {
   // context
-  const { user, handlePower, handleRecord, upgradeLevel } = useUserContext();
+  const {
+    user,
+    flashFired,
+    handlePower,
+    resetPower,
+    handleRecord,
+    upgradeLevel,
+  } = useUserContext();
   // state
   const [score, setScore] = React.useState(0);
   const [matches, setMatches] = React.useState<Matches[]>(initialMatches);
@@ -80,10 +87,18 @@ const Game = () => {
     setFeedback({ isCorrect });
     if (isCorrect) {
       setScore((prev) => prev + 10);
-      handlePower(10);
+      if (!flashFired) handlePower(10);
     }
+    if (flashFired) resetPower();
     setMatch((prev) => ({ ...prev, answered: true } as Match));
-  }, [handlePower, response, match?.question.result, matchNumber]);
+  }, [
+    handlePower,
+    response,
+    match?.question.result,
+    matchNumber,
+    flashFired,
+    resetPower,
+  ]);
   const handleNewQuestion = React.useCallback(() => {
     const question = getQuestion(user?.level);
     setMatch({
@@ -96,6 +111,11 @@ const Game = () => {
     if (feedback) return;
     handleNewQuestion();
   }, [match, feedback, handleNewQuestion]);
+  React.useEffect(() => {
+    if (!flashFired) return;
+    if (!match?.question.result) return;
+    setResponse(match.question.result.toString());
+  }, [flashFired, match?.question.result]);
   // UI
   return (
     <>

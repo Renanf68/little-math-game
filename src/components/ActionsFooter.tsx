@@ -84,7 +84,7 @@ export const ActionsFooter = ({
         {isGame ? <CheckIcon /> : <PlayIcon />}
       </ActionBtn>
       {isGame ? (
-        <FlashButton onAction={() => {}} />
+        <FlashButton />
       ) : (
         <SettingsBtn>
           <Icon as="settings" />

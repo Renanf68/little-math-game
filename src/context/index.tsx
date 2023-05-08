@@ -6,11 +6,14 @@ const storageKey = "little-math-game-users";
 interface UserContextProps {
   users?: User[];
   user?: User;
+  flashFired: boolean;
   clearUser(): void;
   handleUserSelect(user: User): void;
   handleNewUser(name: string, age: number): void;
   handleRecord(total: number): void;
   handlePower(total: number): void;
+  fireFlash(): void;
+  resetPower(): void;
   upgradeLevel(): void;
 }
 
@@ -25,6 +28,7 @@ export const UserProvider = ({ children }: Props) => {
   // state
   const [users, setUsers] = React.useState<User[]>();
   const [user, setUser] = React.useState<User>();
+  const [flashFired, setFlashFired] = React.useState(false);
   // handlers
   const handleNewUser = React.useCallback((name: string, age: number) => {
     const newUser = {
@@ -65,6 +69,16 @@ export const UserProvider = ({ children }: Props) => {
   const upgradeLevel = React.useCallback(() => {
     setUser((prev) => ({ ...prev!, level: (prev?.level ?? 0) + 1 }));
   }, []);
+  const fireFlash = React.useCallback(() => {
+    setFlashFired(true);
+  }, []);
+  const resetPower = React.useCallback(() => {
+    setFlashFired(false);
+    setUser((prev) => ({
+      ...prev!,
+      power: 0,
+    }));
+  }, []);
   // side effects
   React.useEffect(() => {
     const currentData = localStorage.getItem(storageKey);
@@ -94,11 +108,14 @@ export const UserProvider = ({ children }: Props) => {
       value={{
         users,
         user,
+        flashFired,
         clearUser,
         handleUserSelect,
         handleNewUser,
         handleRecord,
         handlePower,
+        fireFlash,
+        resetPower,
         upgradeLevel,
       }}
     >
