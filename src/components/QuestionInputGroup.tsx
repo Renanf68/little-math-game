@@ -9,14 +9,21 @@ const GroupWrapper = styled.div`
 `;
 
 const Input = styled.input`
+  padding-right: 12px;
+  width: 48px;
+  height: 78px;
   border: 1px solid;
-  border-radius: ${(props) => props.theme.borderRadius};
-  padding: 0 8px;
-  width: 34px;
-  height: 68px;
-  font-size: ${(props) => props.theme.fontSize["2xl"]};
+  border-color: ${(props) => props.theme.colors.lightGray};
+  border-radius: 1000px;
+  font-size: ${(props) => props.theme.fontSize["6xl"]};
+  color: ${(props) => props.theme.colors.gray};
   text-align: end;
   margin-left: 6px;
+  :focus {
+    outline: none;
+    border: 2px solid;
+    border-color: ${(props) => props.theme.colors.purple};
+  }
   /* appearance: textfield; */
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;

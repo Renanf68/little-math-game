@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { Question } from "../types";
-// import { Input } from "./Input";
 import React from "react";
-import { Heading } from "./Heading";
 import { QuestionInputGroup } from "./QuestionInputGroup";
 import { Input } from "./Input";
 import { SwitchLayoutButton } from "./SwitchLayoutButton";
+import { Text } from "./Text";
 
 const Card = styled.div`
   width: 100%;
@@ -16,6 +15,7 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 const OperationBoard = styled.div`
+  margin-top: 16px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -25,8 +25,8 @@ const OperationBoard = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: flex-end;
-  /* width: 100%; */
-  border-bottom: 6px solid black;
+  border-bottom: 6px solid;
+  border-color: ${(props) => props.theme.colors.gray};
 `;
 
 const OperationBox = styled.div`
@@ -38,16 +38,26 @@ const OperationBox = styled.div`
 const Term = styled.p`
   margin: 0;
   text-align: end;
-  font-size: ${(props) => props.theme.fontSize["3xl"]};
+  font-size: ${(props) => props.theme.fontSize["7xl"]};
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.gray};
   /* line-height: 0.4rem; */
   letter-spacing: 0.8rem;
 `;
 const Operation = styled.p`
   margin: 0;
   text-align: end;
-  font-size: ${(props) => props.theme.fontSize["3xl"]};
+  font-size: ${(props) => props.theme.fontSize["7xl"]};
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.gray};
   /* line-height: 0.4rem; */
   letter-spacing: 0.8rem;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  width: fill-available;
+  max-width: 300px;
 `;
 
 interface QuestionCardProps {
@@ -113,11 +123,9 @@ export const QuestionCard = ({
   return (
     <Card>
       <CardHeader>
-        <Heading>Pergunta {matchNumber}:</Heading>
-        <SwitchLayoutButton
-          isGroup={isGroup}
-          onClick={() => setIsGroup((prev) => !prev)}
-        />
+        <Text fontSize="3xl" fontWeight="500">
+          Pergunta {matchNumber}
+        </Text>
       </CardHeader>
       <OperationBoard>
         <div>
@@ -130,24 +138,30 @@ export const QuestionCard = ({
               <Term>{question.term2.toLocaleString()}</Term>
             </div>
           </Content>
-          {isGroup ? (
-            <QuestionInputGroup
-              matchNumber={matchNumber}
-              inputs={resultLength}
-              responsesGroup={responsesGroup}
-              onResponseChange={handleResponsesGroup}
-              handleKeyDown={handleKeyDown}
+          <InputWrapper>
+            <SwitchLayoutButton
+              isGroup={isGroup}
+              onClick={() => setIsGroup((prev) => !prev)}
             />
-          ) : (
-            <Input
-              ref={fullInputRef}
-              type="number"
-              value={response}
-              onChange={(e) => notifyResponse(e.target.value)}
-              onKeyDown={handleKeyDown}
-              game
-            />
-          )}
+            {isGroup ? (
+              <QuestionInputGroup
+                matchNumber={matchNumber}
+                inputs={resultLength}
+                responsesGroup={responsesGroup}
+                onResponseChange={handleResponsesGroup}
+                handleKeyDown={handleKeyDown}
+              />
+            ) : (
+              <Input
+                ref={fullInputRef}
+                type="number"
+                value={response}
+                onChange={(e) => notifyResponse(e.target.value)}
+                onKeyDown={handleKeyDown}
+                game
+              />
+            )}
+          </InputWrapper>
         </div>
       </OperationBoard>
     </Card>

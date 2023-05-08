@@ -7,21 +7,27 @@ interface SwitchLayoutButtonProps
 
 const SwitchBtn = styled.button`
   margin-top: 16px;
-  width: 32px;
-  height: 26px;
-  padding: 4px;
+  margin-right: 16px;
+  width: 60px;
+  min-width: 78px;
+  height: 78px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: ${(props) => props.theme.borderRadius};
-  background-color: white;
+  border: 1px solid;
+  border-color: ${(props) => props.theme.colors.purple};
+  border-radius: 39px;
+  background: none;
   cursor: pointer;
 `;
 
 const Box = styled.div`
-  width: 50%;
-  height: 6px;
-  background-color: black;
+  width: 100%;
+  height: 22px;
+  border: 1px solid;
+  border-color: ${(props) => props.theme.colors.purple};
+  border-radius: 1000px;
 `;
 
 export const SwitchLayoutButton = ({
@@ -31,7 +37,7 @@ export const SwitchLayoutButton = ({
   return (
     <SwitchBtn {...props}>
       <Box />
-      <Box style={isGroup ? {} : { marginLeft: "4px" }} />
+      {!isGroup && <Box />}
     </SwitchBtn>
   );
 };
