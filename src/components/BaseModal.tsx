@@ -17,8 +17,8 @@ const ModalCard = styled.div`
   width: 100%;
   max-width: 312px;
   background-color: white;
-  padding: 16px 14px;
-  border-radius: ${(props) => props.theme.borderRadius};
+  padding: 24px 16px;
+  border-radius: 8px;
 `;
 
 interface BaseModalProps {
