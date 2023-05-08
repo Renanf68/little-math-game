@@ -36,14 +36,13 @@ const PowerBar = styled.div`
 `;
 
 interface DifficultyFillProps {
-  difficulty: number;
+  userLevel: number;
 }
 
 const DifficultyFill = styled.div<DifficultyFillProps>`
   position: absolute;
   top: 0;
-  width: ${(props) =>
-    `${props.difficulty > 10 ? 100 : props.difficulty * 10}%`};
+  width: ${(props) => `${props.userLevel > 10 ? 100 : props.userLevel * 10}%`};
   min-width: 15px;
   height: 16px;
   background-color: ${(props) => props.theme.colors.pink};
@@ -57,7 +56,7 @@ const ImageBox = styled.div`
   width: 42px;
 `;
 
-const FlashIconBox = styled.div`
+const ThermoIconBox = styled.div`
   position: absolute;
   top: -7px;
   right: -15px;
@@ -65,10 +64,10 @@ const FlashIconBox = styled.div`
 `;
 
 interface ThermoBoxProps {
-  difficulty: number;
+  userLevel: number;
 }
 
-export const ThermoBox = ({ difficulty }: ThermoBoxProps) => {
+export const ThermoBox = ({ userLevel }: ThermoBoxProps) => {
   return (
     <BoxStyled>
       <Content>
@@ -81,14 +80,14 @@ export const ThermoBox = ({ difficulty }: ThermoBoxProps) => {
         </Text>
         <PowerWrapper>
           <PowerBar />
-          <DifficultyFill difficulty={difficulty}>
-            <FlashIconBox>
+          <DifficultyFill userLevel={userLevel}>
+            <ThermoIconBox>
               <img
                 src={thermoIcon}
                 alt="termômetro de dificuldade"
                 width="100%"
               />
-            </FlashIconBox>
+            </ThermoIconBox>
           </DifficultyFill>
         </PowerWrapper>
       </Content>

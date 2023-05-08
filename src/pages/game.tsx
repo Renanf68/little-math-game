@@ -100,7 +100,7 @@ const Game = () => {
   return (
     <>
       <GameLayout
-        userLevel={user?.level}
+        userLevel={user?.level ?? 1}
         userScore={score}
         matches={matches}
         currentMatch={matchNumber}

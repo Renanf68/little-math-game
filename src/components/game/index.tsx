@@ -2,10 +2,12 @@ import React from "react";
 import { GameHeader } from "./GameHeader";
 import { LevelProgress } from "../LevelProgress";
 import { PageLayout } from "../PageLayout";
-import { Text } from "../Text";
 import styled from "styled-components";
 import { Matches } from "../../types";
 import { ActionsFooter } from "../ActionsFooter";
+import { LevelBadge } from "../LevelBadge";
+import { ScoreBadge } from "../ScoreBadge";
+import { ThermoBar } from "./ThermoBar";
 
 const GameLayoutStyled = styled.div`
   flex: 1;
@@ -13,10 +15,11 @@ const GameLayoutStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-top: 96px;
 `;
 
 interface GameLayoutProps {
-  userLevel?: number;
+  userLevel: number;
   userScore: number;
   matches: Matches[];
   currentMatch: number;
@@ -37,8 +40,9 @@ export const GameLayout = ({
       <GameLayoutStyled id="game-layout">
         <div>
           <GameHeader>
-            <Text>Nível {userLevel}</Text>
-            <Text>Pontos: {userScore}</Text>
+            <LevelBadge level={userLevel} />
+            <ScoreBadge score={userScore} />
+            <ThermoBar userLevel={userLevel} />
           </GameHeader>
           <LevelProgress matches={matches} currentMatch={currentMatch} />
         </div>

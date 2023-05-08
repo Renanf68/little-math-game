@@ -55,7 +55,7 @@ export const Dashboard = () => {
           <RecordBox record={user!.record} />
         </BoxDivider>
         <FlashBox power={user!.power} />
-        <ThermoBox difficulty={user!.level} />
+        <ThermoBox userLevel={user!.level} />
       </div>
       <ActionsFooter backLink="/" onAction={() => navigate("game")} />
     </DashboardStyled>

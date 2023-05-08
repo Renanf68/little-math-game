@@ -54,10 +54,13 @@ export const UserProvider = ({ children }: Props) => {
     }));
   }, []);
   const handlePower = React.useCallback((total: number) => {
-    setUser((prev) => ({
-      ...prev!,
-      power: (prev?.power ?? 0) + total,
-    }));
+    setUser((prev) => {
+      const power = prev?.power ?? 0;
+      return {
+        ...prev!,
+        power: power < 100 ? power + total : power,
+      };
+    });
   }, []);
   const upgradeLevel = React.useCallback(() => {
     setUser((prev) => ({ ...prev!, level: (prev?.level ?? 0) + 1 }));
