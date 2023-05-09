@@ -70,6 +70,8 @@ interface QuestionCardProps {
   matchNumber: number;
   question: Question;
   response: string;
+  isGroup: boolean;
+  handleInputGroup(isGroup: boolean): void;
   notifyResponse(response: string): void;
   reply(): void;
 }
@@ -78,12 +80,13 @@ export const QuestionCard = ({
   matchNumber,
   question,
   response,
+  isGroup,
+  handleInputGroup,
   notifyResponse,
   reply,
 }: QuestionCardProps) => {
   // state
   const [responsesGroup, setResponsesGroup] = React.useState<string[]>([]);
-  const [isGroup, setIsGroup] = React.useState(false);
   // refs
   const fullInputRef = React.useRef<HTMLInputElement>(null);
   // helpers
@@ -118,9 +121,17 @@ export const QuestionCard = ({
     initializeResponsesGroup();
   }, [initializeResponsesGroup, matchNumber]);
   React.useEffect(() => {
+    if (!isGroup) return;
     const concat = responsesGroup.join("");
     notifyResponse(concat);
-  }, [responsesGroup, notifyResponse]);
+  }, [isGroup, responsesGroup, notifyResponse]);
+  React.useEffect(() => {
+    if (isGroup) return;
+    const resArray = response.split("");
+    const diffLength = resultLength - resArray.length;
+    const start = Array(diffLength).fill("");
+    setResponsesGroup([...start, ...resArray]);
+  }, [response, isGroup, resultLength]);
   React.useEffect(() => {
     if (isGroup) return;
     fullInputRef.current?.focus();
@@ -147,7 +158,7 @@ export const QuestionCard = ({
           <InputWrapper>
             <SwitchLayoutButton
               isGroup={isGroup}
-              onClick={() => setIsGroup((prev) => !prev)}
+              onClick={() => handleInputGroup(!isGroup)}
             />
             {isGroup ? (
               <QuestionInputGroup

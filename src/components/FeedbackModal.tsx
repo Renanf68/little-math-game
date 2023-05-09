@@ -1,5 +1,6 @@
 // import styled from "styled-components";
 import React from "react";
+import { useUserContext } from "../context";
 import { BaseModal } from "./BaseModal";
 import { Button } from "./Button";
 import { Text } from "./Text";
@@ -7,7 +8,7 @@ import styled, { useTheme } from "styled-components";
 import dimond from "../images/diamond.png";
 import stamp from "../images/little-stamp.png";
 import close from "../images/close-circle.png";
-import { useUserContext } from "../context";
+import flashFull from "../images/full-flash.png";
 
 interface ResultBadgeProps {
   bgColor: string;
@@ -25,8 +26,10 @@ const FeedbackContet = styled.div`
 const ResultBadge = styled.div<ResultBadgeProps>`
   margin-top: 24px;
   display: flex;
+  justify-content: center;
   align-items: center;
   width: fit-content;
+  min-width: 100px;
   padding: 16px 24px;
   background-color: ${(props) => props.bgColor};
   border-radius: 1000px;
@@ -45,6 +48,12 @@ const StampBox = styled.div`
   height: 26px;
   margin-top: 4px;
   margin-right: 8px;
+`;
+
+const FlashBox = styled.div`
+  width: 32px;
+  height: 32px;
+  margin-top: 4px;
 `;
 
 const CloseBox = styled.div`
@@ -103,6 +112,18 @@ export const FeedbackModal = ({
           </>
         )}
 
+        {user?.power === 100 && (
+          <>
+            <ResultBadge bgColor={theme.colors.lightPurple}>
+              <FlashBox>
+                <img src={flashFull} alt="raio ativo" width="100%" />
+              </FlashBox>
+            </ResultBadge>
+            <Text fontSize="2xl" fontWeight="500">
+              Poder especial ativo!
+            </Text>
+          </>
+        )}
         {upgradeLevel ? (
           <>
             <ResultBadge bgColor={theme.colors.lightYellow}>

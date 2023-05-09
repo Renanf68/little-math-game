@@ -46,6 +46,7 @@ const Game = () => {
   const [match, setMatch] = React.useState<Match>();
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
+  const [isGroup, setIsGroup] = React.useState(false);
   // current response
   // state
   const [response, setResponse] = React.useState("");
@@ -87,18 +88,10 @@ const Game = () => {
     setFeedback({ isCorrect });
     if (isCorrect) {
       setScore((prev) => prev + 10);
-      if (!flashFired) handlePower(10);
+      handlePower(10);
     }
-    if (flashFired) resetPower();
     setMatch((prev) => ({ ...prev, answered: true } as Match));
-  }, [
-    handlePower,
-    response,
-    match?.question.result,
-    matchNumber,
-    flashFired,
-    resetPower,
-  ]);
+  }, [handlePower, response, match?.question.result, matchNumber]);
   const handleNewQuestion = React.useCallback(() => {
     const question = getQuestion(user?.level);
     setMatch({
@@ -114,8 +107,10 @@ const Game = () => {
   React.useEffect(() => {
     if (!flashFired) return;
     if (!match?.question.result) return;
+    setIsGroup(false);
     setResponse(match.question.result.toString());
-  }, [flashFired, match?.question.result]);
+    resetPower();
+  }, [flashFired, match?.question.result, resetPower]);
   // UI
   return (
     <>
@@ -133,6 +128,8 @@ const Game = () => {
             response={response}
             notifyResponse={setResponse}
             reply={handleResponse}
+            isGroup={isGroup}
+            handleInputGroup={(value) => setIsGroup(value)}
           />
         ) : (
           <p>Carregando...</p>
