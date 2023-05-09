@@ -21,6 +21,15 @@ const ModalCard = styled.div`
   padding: 24px 16px;
   border-radius: 8px;
   z-index: 110;
+  @keyframes scaleUp {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation: 0.2s linear scaleUp;
 `;
 
 interface BaseModalProps {

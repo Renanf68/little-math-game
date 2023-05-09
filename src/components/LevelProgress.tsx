@@ -20,6 +20,21 @@ const ProgressBoxStyled = styled.div<ProgressBoxProps>`
       ? props.theme.colors.purple
       : props.theme.colors.lighterPurple};
   border-radius: 4px;
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation: ${(props) =>
+    props.isCurrent && props.isCorrect !== undefined
+      ? "0.3s linear pulse"
+      : ""};
 `;
 
 const LevelProgressStyled = styled.div`
@@ -50,15 +65,6 @@ export const LevelProgress = ({
           isCurrent={currentMatch === match.match}
         />
       ))}
-      {/* <ProgressBoxStyled isCorrect={currentQuestion >= 2} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 3} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 4} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 5} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 6} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 7} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 8} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 9} />
-      <ProgressBoxStyled isCorrect={currentQuestion >= 10} /> */}
     </LevelProgressStyled>
   );
 };
