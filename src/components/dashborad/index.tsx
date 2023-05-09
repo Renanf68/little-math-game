@@ -17,6 +17,7 @@ const DashboardStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: fill-available;
+  padding-bottom: 96px;
 `;
 
 const Header = styled.div`

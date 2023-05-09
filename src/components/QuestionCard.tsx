@@ -7,6 +7,10 @@ import { SwitchLayoutButton } from "./SwitchLayoutButton";
 import { Text } from "./Text";
 
 const Card = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
   width: 100%;
 `;
 const CardHeader = styled.div`
@@ -15,12 +19,14 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 const OperationBoard = styled.div`
-  margin-top: 16px;
-  width: 100%;
+  padding-top: 24px;
+  width: fill-available;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 96px;
 `;
 const Content = styled.div`
   display: flex;

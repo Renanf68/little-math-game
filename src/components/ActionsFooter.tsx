@@ -6,9 +6,12 @@ import { ReactComponent as check } from "../images/check.svg";
 import { FlashButton } from "./FlashButton";
 
 const ActionsFooterStyled = styled.div`
-  width: fill-available;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 390px;
   height: 80px;
-  margin: 0 -14px -14px;
   padding: 0 26px;
   display: flex;
   justify-content: space-between;
@@ -16,6 +19,7 @@ const ActionsFooterStyled = styled.div`
   background-color: white;
   border-radius: 10px 10px 0px 0px;
   box-shadow: 4px 0px 10px 6px rgba(234, 234, 234, 0.25);
+  z-index: 100;
 `;
 const BackBtn = styled.button`
   width: 48px;

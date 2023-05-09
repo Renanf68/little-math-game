@@ -19,7 +19,7 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
   position: relative;
   flex: 1;
-  width: 90%;
+  width: 92%;
   padding: 16px;
   border-radius: 8px;
   display: flex;
