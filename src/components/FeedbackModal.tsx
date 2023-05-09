@@ -94,7 +94,7 @@ export const FeedbackModal = ({
           <>
             <ResultBadge bgColor={theme.colors.lighterPink}>
               <CloseBox>
-                <img src={close} alt="diamante verde" width="100%" />
+                <img src={close} alt="X dentro de um círculo" width="100%" />
               </CloseBox>
             </ResultBadge>
             <Text fontSize="2xl" fontWeight="500">

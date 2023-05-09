@@ -18,7 +18,9 @@ export type IconType =
   | "back"
   | "settings"
   | "check"
-  | "flash";
+  | "flash"
+  | "broom"
+  | "trash";
 export interface User {
   name: string;
   age: number;
@@ -26,6 +28,8 @@ export interface User {
   level: number;
   power: number;
 }
+
+export type SettingsAction = "clear" | "delete";
 
 export type Operation = "+" | "-" | "x" | ":";
 

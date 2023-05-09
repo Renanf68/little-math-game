@@ -3,6 +3,12 @@ import { User } from "../types";
 
 const storageKey = "little-math-game-users";
 
+const initialUser = {
+  record: 0,
+  level: 1,
+  power: 0,
+} as Partial<User>;
+
 interface UserContextProps {
   users?: User[];
   user?: User;
@@ -15,6 +21,8 @@ interface UserContextProps {
   fireFlash(): void;
   resetPower(): void;
   upgradeLevel(): void;
+  clearUserData(): void;
+  deleteUserProfile(): void;
 }
 
 const UserContext = React.createContext<UserContextProps>(
@@ -34,9 +42,7 @@ export const UserProvider = ({ children }: Props) => {
     const newUser = {
       name,
       age,
-      record: 0,
-      level: 1,
-      power: 0,
+      ...initialUser,
     } as User;
     setUsers((prev) => {
       const updated = prev ?? [];
@@ -79,6 +85,20 @@ export const UserProvider = ({ children }: Props) => {
       power: 0,
     }));
   }, []);
+  const clearUserData = React.useCallback(() => {
+    setUser((prev) => ({
+      ...prev!,
+      ...initialUser,
+    }));
+  }, []);
+  const deleteUserProfile = React.useCallback(() => {
+    setUsers((prev) => {
+      const updated = (prev ?? []).filter(
+        (currentUser) => currentUser.name !== user?.name
+      );
+      return updated;
+    });
+  }, [user]);
   // side effects
   React.useEffect(() => {
     const currentData = localStorage.getItem(storageKey);
@@ -117,6 +137,8 @@ export const UserProvider = ({ children }: Props) => {
         fireFlash,
         resetPower,
         upgradeLevel,
+        clearUserData,
+        deleteUserProfile,
       }}
     >
       {children}

@@ -1,18 +1,7 @@
-import { PageLayout } from "../components/PageLayout";
-// import { useUserContext } from "../context";
-import { useTheme } from "styled-components";
-import { Heading } from "../components/Heading";
+import { SettingsLayout } from "../components/settings";
 
 const Settings = () => {
-  // context
-  const theme = useTheme();
-  // const { user } = useUserContext();
-  // UI
-  return (
-    <PageLayout backgroundColor={theme.colors.lighterPurple}>
-      <Heading>Configurações</Heading>
-    </PageLayout>
-  );
+  return <SettingsLayout />;
 };
 
 export default Settings;
