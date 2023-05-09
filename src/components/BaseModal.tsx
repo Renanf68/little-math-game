@@ -11,6 +11,7 @@ const ModalBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 `;
 
 const ModalCard = styled.div`
@@ -19,6 +20,7 @@ const ModalCard = styled.div`
   background-color: white;
   padding: 24px 16px;
   border-radius: 8px;
+  z-index: 110;
 `;
 
 interface BaseModalProps {

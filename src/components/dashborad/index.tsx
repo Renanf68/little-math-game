@@ -17,7 +17,7 @@ const DashboardStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: fill-available;
-  padding-bottom: 96px;
+  padding-bottom: 98px;
 `;
 
 const Header = styled.div`
@@ -41,24 +41,26 @@ export const Dashboard = () => {
   }, [user?.age]);
   // UI
   return (
-    <DashboardStyled>
-      <div>
-        <Header>
-          {avatar && (
-            <img src={avatar} width="32px" alt={`número ${user!.age}`} />
-          )}
-          <Text marginLeft="12px" fontSize="xl" fontWeight="500">
-            Olá, {user!.name}!
-          </Text>
-        </Header>
-        <BoxDivider>
-          <LevelBox level={user!.level} />
-          <RecordBox record={user!.record} />
-        </BoxDivider>
-        <FlashBox power={user!.power} />
-        <ThermoBox userLevel={user!.level} />
-      </div>
+    <>
+      <DashboardStyled>
+        <div>
+          <Header>
+            {avatar && (
+              <img src={avatar} width="32px" alt={`número ${user!.age}`} />
+            )}
+            <Text marginLeft="12px" fontSize="xl" fontWeight="500">
+              Olá, {user!.name}!
+            </Text>
+          </Header>
+          <BoxDivider>
+            <LevelBox level={user!.level} />
+            <RecordBox record={user!.record} />
+          </BoxDivider>
+          <FlashBox power={user!.power} />
+          <ThermoBox userLevel={user!.level} />
+        </div>
+      </DashboardStyled>
       <ActionsFooter backLink="/" onAction={() => navigate("game")} />
-    </DashboardStyled>
+    </>
   );
 };

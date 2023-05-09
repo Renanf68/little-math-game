@@ -32,6 +32,7 @@ const Container = styled.div<ContainerProps>`
   background-position: center;
   background-size: cover;
   background-color: ${(props) => props.backgroundColor ?? "white"};
+  overflow: hidden;
   @media (min-width: 768px) {
     max-width: 390px;
     max-height: 700px;

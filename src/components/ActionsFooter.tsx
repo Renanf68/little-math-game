@@ -6,12 +6,11 @@ import { ReactComponent as check } from "../images/check.svg";
 import { FlashButton } from "./FlashButton";
 
 const ActionsFooterStyled = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  max-width: 390px;
-  height: 80px;
+  height: 82px;
   padding: 0 26px;
   display: flex;
   justify-content: space-between;
@@ -19,7 +18,11 @@ const ActionsFooterStyled = styled.div`
   background-color: white;
   border-radius: 10px 10px 0px 0px;
   box-shadow: 4px 0px 10px 6px rgba(234, 234, 234, 0.25);
-  z-index: 100;
+  z-index: 10;
+  @media (min-width: 400px) {
+    position: absolute;
+    max-width: 390px;
+  }
 `;
 const BackBtn = styled.button`
   width: 48px;
@@ -42,7 +45,7 @@ export const CheckIcon = styled(check)`
   height: 32px;
 `;
 const ActionBtn = styled.button`
-  margin-top: -40px;
+  margin-top: -54px;
   width: 80px;
   height: 80px;
   background-color: ${(props) => props.theme.colors.purple};

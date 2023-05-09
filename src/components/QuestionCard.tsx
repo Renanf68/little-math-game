@@ -19,14 +19,14 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 const OperationBoard = styled.div`
-  padding-top: 24px;
+  padding-top: 16px;
   width: fill-available;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 96px;
+  margin-bottom: 80px;
 `;
 const Content = styled.div`
   display: flex;
