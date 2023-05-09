@@ -29,7 +29,7 @@ const ModalCard = styled.div`
       transform: scale(1);
     }
   }
-  animation: 0.2s linear scaleUp;
+  animation: 0.1s linear scaleUp;
 `;
 
 interface BaseModalProps {

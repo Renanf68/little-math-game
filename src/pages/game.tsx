@@ -5,6 +5,7 @@ import { getQuestion } from "../utils";
 import { QuestionCard } from "../components/QuestionCard";
 import { FeedbackModal } from "../components/FeedbackModal";
 import { GameLayout } from "../components/game";
+import { BigFlash } from "../components/game/BigFlash";
 
 const levelMatches = 10;
 
@@ -47,6 +48,7 @@ const Game = () => {
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
   const [isGroup, setIsGroup] = React.useState(false);
+  const [showBigFlash, setShowBigFlash] = React.useState(false);
   // current response
   // state
   const [response, setResponse] = React.useState("");
@@ -98,6 +100,10 @@ const Game = () => {
       question,
     });
   }, [user?.level]);
+  const handleBigFlash = React.useCallback(() => {
+    setShowBigFlash(true);
+    setTimeout(() => setShowBigFlash(false), 300);
+  }, []);
   // // side effects
   React.useEffect(() => {
     if (match && !match.answered) return;
@@ -111,6 +117,10 @@ const Game = () => {
     setResponse(match.question.result.toString());
     resetPower();
   }, [flashFired, match?.question.result, resetPower]);
+  React.useEffect(() => {
+    if (!flashFired) return;
+    handleBigFlash();
+  }, [flashFired, handleBigFlash]);
   // UI
   return (
     <>
@@ -134,6 +144,7 @@ const Game = () => {
         ) : (
           <p>Carregando...</p>
         )}
+        {showBigFlash && <BigFlash />}
       </GameLayout>
       {feedback && (
         <FeedbackModal
