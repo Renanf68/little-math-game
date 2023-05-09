@@ -10,22 +10,22 @@ const randomIntFromInterval = (min: number, max: number) => {
 const operationOptions = ["+", "-", "x", ":"] as Operation[];
 
 const getOperation = (level: number): Operation => {
-  // levels 1, 2, 3 and 4 => only +
-  if (level <= 4) return "+";
-  // levels 5, 6 and 7 => + or -
+  // levels 1, 2, 3, 4 and 5 => only +
+  if (level <= 5) return "+";
+  // levels 6, 7, 8, 9 and 10 => + or -
   let max = 1;
-  // levels 8 and 9 => +, - or x
-  if (level > 7 && level <= 9) max = 2;
-  // levels 10 above => +, -, x or :
-  if (level > 9) max = 3;
+  // levels 11, 12, 13, 14 and 15 => +, - or x
+  if (level > 10 && level <= 15) max = 2;
+  // levels above 15 => +, -, x or :
+  if (level > 15) max = 3;
   const randomIndex = randomIntFromInterval(0, max);
   return operationOptions[randomIndex];
 };
 
-const bigNumbers = [100, 1000, 10000, 100000, 1000000];
+const bigNumbers = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
 
 const getBigNumber = () => {
-  const randomIndex = randomIntFromInterval(0, 4);
+  const randomIndex = randomIntFromInterval(0, 9);
   return bigNumbers[randomIndex];
 };
 
@@ -41,7 +41,7 @@ const getIntroTerms = (level: number, operation: Operation): Terms => {
   } else if (level === 3) {
     term1 = randomIntFromInterval(10, 20);
     term2 = randomIntFromInterval(0, 10);
-  } else if (level === 4) {
+  } else if (level === 4 || level === 5) {
     term1 = randomIntFromInterval(0, 20);
     term2 = randomIntFromInterval(0, 10);
     // term1 = getTens();
@@ -88,8 +88,13 @@ const getMediumTerms = (level: number, operation: Operation) => {
     term1 = terms.term1;
     term2 = terms.term2;
   } else if (operation === "x") {
-    term1 = randomIntFromInterval(0, 10);
-    term2 = randomIntFromInterval(0, 10);
+    if (level < 20) {
+      term1 = randomIntFromInterval(0, 8);
+      term2 = randomIntFromInterval(0, 4);
+    } else {
+      term1 = randomIntFromInterval(0, 10);
+      term2 = randomIntFromInterval(0, 10);
+    }
   } else {
     const terms = getDivision();
     term1 = terms.term1;
@@ -113,7 +118,7 @@ export const getQuestion = (level: number = 1): Question => {
   let term1;
   let term2;
   let operation = getOperation(level);
-  if (level < 5) {
+  if (level <= 5) {
     const terms = getIntroTerms(level, operation);
     term1 = terms.term1;
     term2 = terms.term2;
