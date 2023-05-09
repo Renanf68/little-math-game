@@ -98,6 +98,7 @@ export const UserProvider = ({ children }: Props) => {
       );
       return updated;
     });
+    setUser(undefined);
   }, [user]);
   // side effects
   React.useEffect(() => {

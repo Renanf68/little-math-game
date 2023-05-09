@@ -1,15 +1,15 @@
 // import styled from "styled-components";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { BaseModal } from "../BaseModal";
 import { Button } from "../Button";
 import { Text } from "../Text";
-import styled from "styled-components";
 import { useUserContext } from "../../context";
 import { SettingsAction } from "../../types";
 import close from "../../images/close-circle.png";
 
 const ModalContet = styled.div`
-  /* width: fill-available; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,12 +42,14 @@ export const ConfirmationModal = ({
   onClose,
 }: ConfirmationModalProps) => {
   // context
+  const navigate = useNavigate();
   const { clearUserData, deleteUserProfile } = useUserContext();
   // handlers
   const handleAction = React.useCallback(() => {
     if (action === "clear") clearUserData();
     else if (action === "delete") deleteUserProfile();
-  }, [action, clearUserData, deleteUserProfile]);
+    navigate("/app");
+  }, [action, clearUserData, deleteUserProfile, navigate]);
   // UI
   return (
     <BaseModal>
