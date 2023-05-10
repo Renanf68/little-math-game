@@ -14,7 +14,7 @@ const GameLayoutStyled = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 96px;
+  padding-top: 84px;
 `;
 
 interface GameLayoutProps {

@@ -2,7 +2,7 @@ import React from "react";
 import { useUserContext } from "../context";
 import { FeedBack, Match, Matches } from "../types";
 import { getQuestion } from "../utils";
-import { QuestionCard } from "../components/QuestionCard";
+import { QuestionCard } from "../components/game/QuestionCard";
 import { FeedbackModal } from "../components/FeedbackModal";
 import { GameLayout } from "../components/game";
 import { BigFlash } from "../components/game/BigFlash";
@@ -135,11 +135,11 @@ const Game = () => {
           <QuestionCard
             matchNumber={matchNumber}
             question={match.question}
-            response={response}
+            // response={response}
             notifyResponse={setResponse}
             reply={handleResponse}
-            isGroup={isGroup}
-            handleInputGroup={(value) => setIsGroup(value)}
+            // isGroup={isGroup}
+            // handleInputGroup={(value) => setIsGroup(value)}
           />
         ) : (
           <p>Carregando...</p>

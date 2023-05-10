@@ -8,7 +8,7 @@ const GameHeaderStyled = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 24px 16px;
+  padding: 20px 16px;
   box-shadow: 4px 0px 10px 6px rgba(234, 234, 234, 0.25);
   border-radius: 10px 10px 0px 0px;
 `;

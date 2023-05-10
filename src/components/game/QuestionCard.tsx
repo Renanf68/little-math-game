@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import { Question } from "../types";
+import { Question } from "../../types";
 import React from "react";
-import { QuestionInputGroup } from "./QuestionInputGroup";
-import { Input } from "./Input";
-import { SwitchLayoutButton } from "./SwitchLayoutButton";
-import { Text } from "./Text";
+import { Text } from "../Text";
+import { NumberKeyboard } from "./NumberKeyboard";
+import { ResponseDisplay } from "./ResponseDisplay";
 
 const Card = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: 16px;
   width: 100%;
 `;
 const CardHeader = styled.div`
@@ -19,7 +18,6 @@ const CardHeader = styled.div`
   justify-content: space-between;
 `;
 const OperationBoard = styled.div`
-  padding-top: 16px;
   width: fill-available;
   flex: 1;
   display: flex;
@@ -30,21 +28,24 @@ const OperationBoard = styled.div`
 `;
 const Content = styled.div`
   display: flex;
+  flex-direction: column;
+`;
+const TermsBox = styled.div`
+  display: flex;
   justify-content: flex-end;
+  max-width: 300px;
   border-bottom: 6px solid;
   border-color: ${(props) => props.theme.colors.gray};
 `;
-
 const OperationBox = styled.div`
   padding: 0 14px;
   display: flex;
   align-items: flex-end;
 `;
-
 const Term = styled.p`
   margin: 0;
   text-align: end;
-  font-size: ${(props) => props.theme.fontSize["7xl"]};
+  font-size: ${(props) => props.theme.fontSize["6xl"]};
   font-weight: 500;
   color: ${(props) => props.theme.colors.gray};
   /* line-height: 0.4rem; */
@@ -53,7 +54,7 @@ const Term = styled.p`
 const Operation = styled.p`
   margin: 0;
   text-align: end;
-  font-size: ${(props) => props.theme.fontSize["7xl"]};
+  font-size: ${(props) => props.theme.fontSize["6xl"]};
   font-weight: 500;
   color: ${(props) => props.theme.colors.gray};
   /* line-height: 0.4rem; */
@@ -69,9 +70,9 @@ const InputWrapper = styled.div`
 interface QuestionCardProps {
   matchNumber: number;
   question: Question;
-  response: string;
-  isGroup: boolean;
-  handleInputGroup(isGroup: boolean): void;
+  // response: string;
+  // isGroup: boolean;
+  // handleInputGroup(isGroup: boolean): void;
   notifyResponse(response: string): void;
   reply(): void;
 }
@@ -79,16 +80,12 @@ interface QuestionCardProps {
 export const QuestionCard = ({
   matchNumber,
   question,
-  response,
-  isGroup,
-  handleInputGroup,
   notifyResponse,
-  reply,
-}: QuestionCardProps) => {
+}: // reply,
+QuestionCardProps) => {
   // state
   const [responsesGroup, setResponsesGroup] = React.useState<string[]>([]);
-  // refs
-  const fullInputRef = React.useRef<HTMLInputElement>(null);
+  const [responseToRight, setResponseToRight] = React.useState(true);
   // helpers
   const resultLength = React.useMemo(
     () => question.result.toString().length,
@@ -96,46 +93,37 @@ export const QuestionCard = ({
   );
   // handlers
   const initializeResponsesGroup = React.useCallback(() => {
-    const array = Array(resultLength).fill("");
-    setResponsesGroup(array);
-  }, [resultLength]);
+    setResponsesGroup([]);
+  }, []);
   const handleResponsesGroup = React.useCallback(
-    (inputIndex: number, value: string) => {
+    (value: string) => {
+      if (responsesGroup.length === resultLength) return;
       setResponsesGroup((prev) => {
-        const newResp = prev.map((r, i) => {
-          if (i === inputIndex) return value;
-          return r;
-        });
-        return newResp;
+        if (responseToRight) {
+          const newGroup = [...prev];
+          newGroup.push(value);
+          return newGroup;
+        }
+        const newGroup = [...prev];
+        newGroup.unshift(value);
+        return newGroup;
       });
     },
-    []
+    [responseToRight, resultLength, responsesGroup]
   );
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      reply();
-    }
-  };
+  // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.key === "Enter" && !event.shiftKey) {
+  //     event.preventDefault();
+  //     reply();
+  //   }
+  // };
   React.useEffect(() => {
     initializeResponsesGroup();
   }, [initializeResponsesGroup, matchNumber]);
   React.useEffect(() => {
-    if (!isGroup) return;
     const concat = responsesGroup.join("");
     notifyResponse(concat);
-  }, [isGroup, responsesGroup, notifyResponse]);
-  React.useEffect(() => {
-    if (isGroup) return;
-    const resArray = response.split("");
-    const diffLength = resultLength - resArray.length;
-    const start = Array(diffLength).fill("");
-    setResponsesGroup([...start, ...resArray]);
-  }, [response, isGroup, resultLength]);
-  React.useEffect(() => {
-    if (isGroup) return;
-    fullInputRef.current?.focus();
-  }, [matchNumber, isGroup]);
+  }, [responsesGroup, notifyResponse]);
   // UI
   return (
     <Card>
@@ -145,8 +133,8 @@ export const QuestionCard = ({
         </Text>
       </CardHeader>
       <OperationBoard>
-        <div>
-          <Content>
+        <Content>
+          <TermsBox>
             <OperationBox>
               <Operation>{question.operation}</Operation>
             </OperationBox>
@@ -154,32 +142,21 @@ export const QuestionCard = ({
               <Term>{question.term1.toLocaleString()}</Term>
               <Term>{question.term2.toLocaleString()}</Term>
             </div>
-          </Content>
+          </TermsBox>
           <InputWrapper>
-            <SwitchLayoutButton
-              isGroup={isGroup}
-              onClick={() => handleInputGroup(!isGroup)}
+            <ResponseDisplay
+              responseToRight={responseToRight}
+              resultLenght={resultLength}
+              responsesGroup={responsesGroup}
             />
-            {isGroup ? (
-              <QuestionInputGroup
-                matchNumber={matchNumber}
-                inputs={resultLength}
-                responsesGroup={responsesGroup}
-                onResponseChange={handleResponsesGroup}
-                handleKeyDown={handleKeyDown}
-              />
-            ) : (
-              <Input
-                ref={fullInputRef}
-                type="number"
-                value={response}
-                onChange={(e) => notifyResponse(e.target.value)}
-                onKeyDown={handleKeyDown}
-                game
-              />
-            )}
           </InputWrapper>
-        </div>
+        </Content>
+        <NumberKeyboard
+          responseToRight={responseToRight}
+          onDirectionChange={setResponseToRight}
+          handleKeyPress={handleResponsesGroup}
+          onBackspace={() => {}}
+        />
       </OperationBoard>
     </Card>
   );
