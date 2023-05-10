@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 const GroupWrapper = styled.div`
-  margin-top: 14px;
+  margin-top: 10px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -11,15 +11,16 @@ const GroupWrapper = styled.div`
 const Dash = styled.div`
   width: 36px;
   height: 64px;
-  border-bottom: 1px solid;
-  border-color: ${(props) => props.theme.colors.gray};
-  margin-right: 14px;
+  border-bottom: 2px solid;
+  border-color: ${(props) => props.theme.colors.lighterGray};
+  margin-right: 9px;
 `;
 
 const ResponseNumber = styled.p`
   margin: 0;
   font-size: ${(props) => props.theme.fontSize["6xl"]};
-  color: ${(props) => props.theme.colors.gray};
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.purple};
 `;
 
 interface ResponseDisplayProps {

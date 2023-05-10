@@ -48,7 +48,6 @@ const Term = styled.p`
   font-size: ${(props) => props.theme.fontSize["6xl"]};
   font-weight: 500;
   color: ${(props) => props.theme.colors.gray};
-  /* line-height: 0.4rem; */
   letter-spacing: 0.8rem;
 `;
 const Operation = styled.p`
@@ -57,7 +56,6 @@ const Operation = styled.p`
   font-size: ${(props) => props.theme.fontSize["6xl"]};
   font-weight: 500;
   color: ${(props) => props.theme.colors.gray};
-  /* line-height: 0.4rem; */
   letter-spacing: 0.8rem;
 `;
 
@@ -70,9 +68,6 @@ const InputWrapper = styled.div`
 interface QuestionCardProps {
   matchNumber: number;
   question: Question;
-  // response: string;
-  // isGroup: boolean;
-  // handleInputGroup(isGroup: boolean): void;
   notifyResponse(response: string): void;
   reply(): void;
 }
@@ -111,12 +106,7 @@ QuestionCardProps) => {
     },
     [responseToRight, resultLength, responsesGroup]
   );
-  // const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (event.key === "Enter" && !event.shiftKey) {
-  //     event.preventDefault();
-  //     reply();
-  //   }
-  // };
+  // side effects
   React.useEffect(() => {
     initializeResponsesGroup();
   }, [initializeResponsesGroup, matchNumber]);
