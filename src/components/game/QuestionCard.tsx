@@ -4,6 +4,7 @@ import React from "react";
 import { Text } from "../Text";
 import { NumberKeyboard } from "./NumberKeyboard";
 import { ResponseDisplay } from "./ResponseDisplay";
+import { useUserContext } from "../../context";
 
 const Card = styled.div`
   flex: 1;
@@ -76,8 +77,9 @@ export const QuestionCard = ({
   matchNumber,
   question,
   notifyResponse,
-}: // reply,
-QuestionCardProps) => {
+}: QuestionCardProps) => {
+  // context
+  const { flashFired, resetPower } = useUserContext();
   // state
   const [responsesGroup, setResponsesGroup] = React.useState<string[]>([]);
   const [responseToRight, setResponseToRight] = React.useState(true);
@@ -126,6 +128,13 @@ QuestionCardProps) => {
     const concat = responsesGroup.join("");
     notifyResponse(concat);
   }, [responsesGroup, notifyResponse]);
+  React.useEffect(() => {
+    if (!flashFired) return;
+    if (!question.result) return;
+    const responseArray = question.result.toString().split("");
+    setResponsesGroup(responseArray);
+    resetPower();
+  }, [flashFired, question.result, resetPower]);
   // UI
   return (
     <Card>

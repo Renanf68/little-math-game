@@ -24,23 +24,10 @@ const initialMatches = [
   { match: 10 },
 ] as Matches[];
 
-// const fakeQ = {
-//   term1: 2400,
-//   term2: 12,
-//   operation: "+",
-//   result: 2412,
-// } as Question;
-
 const Game = () => {
   // context
-  const {
-    user,
-    flashFired,
-    handlePower,
-    resetPower,
-    handleRecord,
-    upgradeLevel,
-  } = useUserContext();
+  const { user, flashFired, handlePower, handleRecord, upgradeLevel } =
+    useUserContext();
   // state
   const [score, setScore] = React.useState(0);
   const [matches, setMatches] = React.useState<Matches[]>(initialMatches);
@@ -48,7 +35,6 @@ const Game = () => {
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
   const [showBigFlash, setShowBigFlash] = React.useState(false);
-  // current response
   // state
   const [response, setResponse] = React.useState("");
   // helpers
@@ -109,12 +95,6 @@ const Game = () => {
     if (feedback) return;
     handleNewQuestion();
   }, [match, feedback, handleNewQuestion]);
-  React.useEffect(() => {
-    if (!flashFired) return;
-    if (!match?.question.result) return;
-    setResponse(match.question.result.toString());
-    resetPower();
-  }, [flashFired, match?.question.result, resetPower]);
   React.useEffect(() => {
     if (!flashFired) return;
     handleBigFlash();
