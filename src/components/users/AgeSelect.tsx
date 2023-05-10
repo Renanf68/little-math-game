@@ -6,6 +6,7 @@ import number7 from "../../images/number7.png";
 import number8 from "../../images/number8.png";
 import number9 from "../../images/number9.png";
 import number10 from "../../images/number10.png";
+import number11 from "../../images/number11.png";
 import { Text } from "../Text";
 
 const Flex = styled.div`
@@ -14,7 +15,7 @@ const Flex = styled.div`
   padding-top: 32px;
   padding-bottom: 32px;
   width: fill-available;
-  min-height: 112px;
+  min-height: 116px;
   background-color: white;
   border-radius: 8px;
   display: flex;
@@ -82,6 +83,9 @@ export const AgeSelect = ({ selected, onSelect }: AgeSelectProps) => {
           </AgeBox>
           <AgeBox selected={selected === 10} onClick={() => onSelect(10)}>
             <img src={number10} alt="número 10" width="100%" />
+          </AgeBox>
+          <AgeBox selected={selected === 11} onClick={() => onSelect(11)}>
+            <img src={number11} alt="maiores de 10 anos" width="100%" />
           </AgeBox>
         </AgeList>
       </AgeSelectStyled>
