@@ -47,7 +47,6 @@ const Game = () => {
   const [match, setMatch] = React.useState<Match>();
   const [feedback, setFeedback] = React.useState<FeedBack>();
   const [matchNumber, setMatchNumber] = React.useState(1);
-  const [isGroup, setIsGroup] = React.useState(false);
   const [showBigFlash, setShowBigFlash] = React.useState(false);
   // current response
   // state
@@ -113,7 +112,6 @@ const Game = () => {
   React.useEffect(() => {
     if (!flashFired) return;
     if (!match?.question.result) return;
-    setIsGroup(false);
     setResponse(match.question.result.toString());
     resetPower();
   }, [flashFired, match?.question.result, resetPower]);
@@ -135,11 +133,8 @@ const Game = () => {
           <QuestionCard
             matchNumber={matchNumber}
             question={match.question}
-            // response={response}
             notifyResponse={setResponse}
             reply={handleResponse}
-            // isGroup={isGroup}
-            // handleInputGroup={(value) => setIsGroup(value)}
           />
         ) : (
           <p>Carregando...</p>
