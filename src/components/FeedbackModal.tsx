@@ -80,7 +80,7 @@ export const FeedbackModal = ({
 }: FeedbackModalProps) => {
   // context
   const theme = useTheme();
-  const { user } = useUserContext();
+  const { user, notifyFlash } = useUserContext();
   // refs
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   // side effects
@@ -118,7 +118,7 @@ export const FeedbackModal = ({
           </>
         )}
 
-        {user?.power === 100 && (
+        {notifyFlash && (
           <>
             <ResultBadge bgColor={theme.colors.lightPurple}>
               <FlashBox>

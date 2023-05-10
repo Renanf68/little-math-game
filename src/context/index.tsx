@@ -12,12 +12,14 @@ const initialUser = {
 interface UserContextProps {
   users?: User[];
   user?: User;
+  notifyFlash: boolean;
   flashFired: boolean;
   clearUser(): void;
   handleUserSelect(user: User): void;
   handleNewUser(name: string, age: number): void;
   handleRecord(total: number): void;
   handlePower(total: number): void;
+  setFlashNotified(value: boolean): void;
   fireFlash(): void;
   resetPower(): void;
   upgradeLevel(): void;
@@ -37,6 +39,11 @@ export const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = React.useState<User[]>();
   const [user, setUser] = React.useState<User>();
   const [flashFired, setFlashFired] = React.useState(false);
+  const [flashNotified, setFlashNotified] = React.useState(false);
+  // helpers
+  const notifyFlash = React.useMemo(() => {
+    return user?.power === 100 && !flashNotified;
+  }, [user?.power, flashNotified]);
   // handlers
   const handleNewUser = React.useCallback((name: string, age: number) => {
     const newUser = {
@@ -80,6 +87,7 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
   const resetPower = React.useCallback(() => {
     setFlashFired(false);
+    setFlashNotified(false);
     setUser((prev) => ({
       ...prev!,
       power: 0,
@@ -129,12 +137,14 @@ export const UserProvider = ({ children }: Props) => {
       value={{
         users,
         user,
+        notifyFlash,
         flashFired,
         clearUser,
         handleUserSelect,
         handleNewUser,
         handleRecord,
         handlePower,
+        setFlashNotified,
         fireFlash,
         resetPower,
         upgradeLevel,

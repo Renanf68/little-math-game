@@ -28,8 +28,15 @@ const initialMatches = [
 const Game = () => {
   // context
   const navigate = useNavigate();
-  const { user, flashFired, handlePower, handleRecord, upgradeLevel } =
-    useUserContext();
+  const {
+    user,
+    notifyFlash,
+    flashFired,
+    handlePower,
+    setFlashNotified,
+    handleRecord,
+    upgradeLevel,
+  } = useUserContext();
   // state
   const [score, setScore] = React.useState(0);
   const [matches, setMatches] = React.useState<Matches[]>(initialMatches);
@@ -47,6 +54,10 @@ const Game = () => {
     }
   }, [matchNumber, score]);
   // handlers
+  const handleFlashNotification = React.useCallback(() => {
+    if (!notifyFlash) return;
+    setFlashNotified(true);
+  }, [notifyFlash, setFlashNotified]);
   const handleNextMatch = React.useCallback(() => {
     if (matchNumber === levelMatches) {
       if (score >= levelMinimumScore) {
@@ -60,7 +71,8 @@ const Game = () => {
       setMatchNumber((prev) => prev + 1);
     }
     setFeedback(undefined);
-  }, [matchNumber, score, handleRecord, upgradeLevel]);
+    handleFlashNotification();
+  }, [matchNumber, score, handleRecord, upgradeLevel, handleFlashNotification]);
   const handleResponse = React.useCallback(() => {
     const responseInt = parseInt(response);
     let isCorrect = false;

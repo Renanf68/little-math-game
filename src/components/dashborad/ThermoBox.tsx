@@ -42,7 +42,7 @@ interface DifficultyFillProps {
 const DifficultyFill = styled.div<DifficultyFillProps>`
   position: absolute;
   top: 0;
-  width: ${(props) => `${props.userLevel > 10 ? 100 : props.userLevel * 10}%`};
+  width: ${(props) => `${props.userLevel > 20 ? 100 : props.userLevel * 5}%`};
   min-width: 15px;
   height: 16px;
   background-color: ${(props) => props.theme.colors.pink};
