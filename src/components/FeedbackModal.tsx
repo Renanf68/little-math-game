@@ -7,6 +7,7 @@ import { Text } from "./Text";
 import styled, { useTheme } from "styled-components";
 import dimond from "../images/diamond.png";
 import stamp from "../images/little-stamp.png";
+import grayStamp from "../images/gray-stamp.png";
 import close from "../images/close-circle.png";
 import flashFull from "../images/full-flash.png";
 
@@ -59,6 +60,11 @@ const FlashBox = styled.div`
 const CloseBox = styled.div`
   width: 40px;
   height: 40px;
+`;
+
+const GrayStampBox = styled.div`
+  width: 36px;
+  height: 36px;
 `;
 
 interface FeedbackModalProps {
@@ -139,7 +145,16 @@ export const FeedbackModal = ({
             </Text>
           </>
         ) : upgradeLevel === false ? (
-          <Text>Você precisa recomeçar =/</Text>
+          <>
+            <ResultBadge bgColor={theme.colors.lighterGray}>
+              <GrayStampBox>
+                <img src={grayStamp} alt="selo de novo nível" width="100%" />
+              </GrayStampBox>
+            </ResultBadge>
+            <Text fontSize="2xl" fontWeight="500">
+              Você precisa recomeçar :(
+            </Text>
+          </>
         ) : (
           <></>
         )}
