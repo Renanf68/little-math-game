@@ -106,6 +106,18 @@ QuestionCardProps) => {
     },
     [responseToRight, resultLength, responsesGroup]
   );
+  const handleBackspace = React.useCallback(() => {
+    setResponsesGroup((prev) => {
+      if (responseToRight) {
+        const newGroup = [...prev];
+        newGroup.pop();
+        return newGroup;
+      }
+      const newGroup = [...prev];
+      newGroup.shift();
+      return newGroup;
+    });
+  }, [responseToRight]);
   // side effects
   React.useEffect(() => {
     initializeResponsesGroup();
@@ -145,7 +157,7 @@ QuestionCardProps) => {
           responseToRight={responseToRight}
           onDirectionChange={setResponseToRight}
           handleKeyPress={handleResponsesGroup}
-          onBackspace={() => {}}
+          onBackspace={handleBackspace}
         />
       </OperationBoard>
     </Card>

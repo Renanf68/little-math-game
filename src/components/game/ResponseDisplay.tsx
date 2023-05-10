@@ -23,6 +23,13 @@ const ResponseNumber = styled.p`
   color: ${(props) => props.theme.colors.purple};
 `;
 
+const Dot = styled.p`
+  margin: 0 9px 0 0;
+  font-size: ${(props) => props.theme.fontSize["6xl"]};
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.purple};
+`;
+
 interface ResponseDisplayProps {
   responseToRight: boolean;
   resultLenght: number;
@@ -59,10 +66,14 @@ export const ResponseDisplay = ({
       {baseArray.map((item, index) => {
         const reverseIndex = getReverselength(resultLenght, index);
         const itemIndex = responseToRight ? index : reverseIndex;
+        const showDot = resultLenght > 3 && index === 0;
         return (
-          <Dash key={item}>
-            <ResponseNumber>{groupToDisplay[itemIndex]}</ResponseNumber>
-          </Dash>
+          <>
+            <Dash key={item}>
+              <ResponseNumber>{groupToDisplay[itemIndex]}</ResponseNumber>
+            </Dash>
+            {showDot && <Dot>.</Dot>}
+          </>
         );
       })}
     </GroupWrapper>

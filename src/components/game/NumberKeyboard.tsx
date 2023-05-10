@@ -49,9 +49,14 @@ const KeyNumber = styled.p`
   color: ${(props) => props.theme.colors.gray};
 `;
 
-const Backspace = styled(backspace)`
+interface BackspaceProps {
+  isRight?: boolean;
+}
+
+const Backspace = styled(backspace)<BackspaceProps>`
   width: 24px;
   height: 24px;
+  transform: ${(props) => !props.isRight && "rotate(180deg)"};
 `;
 
 interface ArrowProps {
@@ -123,8 +128,8 @@ export const NumberKeyboard = ({
             <KeyNumber>{number}</KeyNumber>
           </KeyCard>
         ))}
-        <KeyCard>
-          <Backspace />
+        <KeyCard onClick={onBackspace}>
+          <Backspace isRight={responseToRight} />
         </KeyCard>
       </KeyboardFlex>
     </KeyboardContainer>
