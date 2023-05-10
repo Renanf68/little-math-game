@@ -6,6 +6,7 @@ import { QuestionCard } from "../components/game/QuestionCard";
 import { FeedbackModal } from "../components/FeedbackModal";
 import { GameLayout } from "../components/game";
 import { BigFlash } from "../components/game/BigFlash";
+import { useNavigate } from "react-router-dom";
 
 const levelMatches = 10;
 
@@ -26,6 +27,7 @@ const initialMatches = [
 
 const Game = () => {
   // context
+  const navigate = useNavigate();
   const { user, flashFired, handlePower, handleRecord, upgradeLevel } =
     useUserContext();
   // state
@@ -99,6 +101,10 @@ const Game = () => {
     if (!flashFired) return;
     handleBigFlash();
   }, [flashFired, handleBigFlash]);
+  React.useEffect(() => {
+    if (user) return;
+    navigate("/app");
+  }, [user, navigate]);
   // UI
   return (
     <>
