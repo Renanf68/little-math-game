@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import number6 from "../../images/number6.png";
 import { Text } from "../Text";
 import { User } from "../../types";
 import { useUserContext } from "../../context";
 import { LevelBadge } from "../LevelBadge";
 import { ScoreBadge } from "../ScoreBadge";
+import React from "react";
+import { getUserAvatar } from "../../utils/ages";
 
 const UserCardStyled = styled.div`
   margin-top: 24px;
@@ -42,11 +43,16 @@ interface UserCardProps {
 export const UserCard = ({ user }: UserCardProps) => {
   // context
   const { handleUserSelect } = useUserContext();
+  // helpers
+  const avatar = React.useMemo(() => {
+    if (!user?.age) return null;
+    return getUserAvatar(user.age);
+  }, [user?.age]);
   // UI
   return (
     <UserCardStyled onClick={() => handleUserSelect(user)}>
       <UserAvatarBox>
-        <img src={number6} alt="avatar do usuário" width="100%" />
+        {avatar && <img src={avatar} alt="avatar do usuário" width="100%" />}
       </UserAvatarBox>
       <UserInfosFlex>
         <Text fontSize="xl" fontWeight="500" lineHeight="0">
