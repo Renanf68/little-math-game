@@ -76,7 +76,7 @@ export const ThermoBox = ({ userLevel }: ThermoBoxProps) => {
         </Text>
         <Text marginTop="6px" fontSize="xs">
           A medida que você avança nos diferentes níveis, as perguntas ficam
-          mais difícies
+          mais difíceis
         </Text>
         <PowerWrapper>
           <PowerBar />
